@@ -6,17 +6,20 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
       "project": "./tsconfig.json"
   },
   "plugins": [
+    "prettier",
     "react",
     "@typescript-eslint"
   ],
   "rules": {
+    "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off"
   }
 }
