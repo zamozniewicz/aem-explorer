@@ -14,9 +14,9 @@
       "project": "./tsconfig.json"
   },
   "plugins": [
-    "prettier",
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "rules": {
     "prettier/prettier": "error",
