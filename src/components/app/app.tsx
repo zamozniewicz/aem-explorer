@@ -25,6 +25,7 @@ export const App: FC = () => {
           body {
             margin: 0;
             padding: 0;
+            min-width: 400px;
           }
         `}
       />
