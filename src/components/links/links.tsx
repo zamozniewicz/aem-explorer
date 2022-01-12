@@ -83,7 +83,7 @@ const linksGroups: LinksGroup[] = [
       },
       {
         pathname: "/aem/experience-fragments.html/content/experience-fragments",
-        label: "Exp. fragments",
+        label: "Fragments",
       },
       {
         pathname: "/sites.html/content",
