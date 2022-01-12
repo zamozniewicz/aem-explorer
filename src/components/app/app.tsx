@@ -5,14 +5,12 @@ import {
   ThemeContextProvider,
   useThemeContext,
 } from "../../contexts/theme-context";
-import {
-  OpenInNewTabContextProvider,
-  useOpenInNewTabContext,
-} from "../../contexts/open-in-new-tab-context";
+import { OpenInNewTabContextProvider } from "../../contexts/open-in-new-tab-context";
 import { Footer } from "../footer/footer";
 import { Mode } from "../mode/mode";
 import { ClientLibs } from "../client-libs/client-libs";
 import { Links } from "../links/links";
+import { CurrentPageMode } from "../current-page-mode/current-page-mode";
 
 const muiTheme: Theme = createTheme({
   palette: {
@@ -48,6 +46,7 @@ export const App: FC = () => {
             >
               <Mode />
               <ClientLibs />
+              <CurrentPageMode />
               <Links />
               <Footer />
             </Container>
