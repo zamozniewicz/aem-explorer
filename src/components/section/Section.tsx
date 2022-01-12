@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Section = ({ children }: Props) => {
+export const Section = ({ children }: Props) => {
   return (
     <Paper elevation={1} sx={{ p: 1 }}>
       {children}
@@ -46,5 +46,3 @@ Section.Buttons = <T extends {}>({
     </ToggleButtonGroup>
   );
 };
-
-export default Section;

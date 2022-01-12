@@ -1,7 +1,7 @@
 import { editorPath, Mode, modeParam } from "../model/modes";
 import { Tab } from "../model/tab";
-import getCurrentTab from "./getCurrentTab";
-import isTab from "./isTab";
+import { getCurrentTab } from "./getCurrentTab";
+import { isTab } from "./isTab";
 
 const disableWcm = (tab: Tab): void => {
   const url = new URL(tab.url);
@@ -15,7 +15,7 @@ const disableWcm = (tab: Tab): void => {
   chrome.tabs.update(tab.id, { url: url.toString() });
 };
 
-const setWcmMode = async (mode: Mode) => {
+export const setWcmMode = async (mode: Mode) => {
   const tab = await getCurrentTab();
 
   if (!isTab(tab)) {
@@ -42,5 +42,3 @@ const setWcmMode = async (mode: Mode) => {
 
   chrome.tabs.update(tab.id, { url: url.toString() });
 };
-
-export default setWcmMode;

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
 import { ThemeContextProvider } from "../../contexts/ThemeContext";
-import Footer from "../footer/Footer";
-import WcmMode from "../wcm-mode/WcmMode";
+import { Footer } from "../footer/Footer";
+import { WcmMode } from "../wcm-mode/WcmMode";
 
-const App: FC = () => {
+export const App: FC = () => {
   return (
     <ThemeContextProvider>
       <Box
@@ -19,5 +19,3 @@ const App: FC = () => {
     </ThemeContextProvider>
   );
 };
-
-export default App;

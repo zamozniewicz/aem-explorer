@@ -10,7 +10,7 @@ import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import { useThemeContext } from "../../contexts/ThemeContext";
 
-const Footer = () => {
+export const Footer = () => {
   const { theme, toggleTheme } = useThemeContext();
   return (
     <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
@@ -36,5 +36,3 @@ const Footer = () => {
     </AppBar>
   );
 };
-
-export default Footer;

@@ -7,10 +7,10 @@ import {
   Tooltip,
 } from "@mui/material";
 import { Mode, modes } from "../../model/modes";
-import setWcmMode from "../../utils/setWcmMode";
-import detectMode from "../../utils/detectMode";
-import debugClientLibs from "../../utils/debugClientLibs";
-import Section from "../section/Section";
+import { setWcmMode } from "../../utils/setWcmMode";
+import { detectMode } from "../../utils/detectMode";
+import { debugClientLibs } from "../../utils/debugClientLibs";
+import { Section } from "../section/Section";
 
 const modeNames: Record<Mode, string> = {
   disabled: "Disabled",
@@ -26,7 +26,7 @@ const modeTooltips: Record<Mode, string> = {
   design: "WCM in design mode",
 };
 
-const WcmMode: FC = () => {
+export const WcmMode: FC = () => {
   const [currentMode, setCurrentMode] = useState<Mode | null>(null);
   useEffect(() => {
     detectMode().then((mode) => setCurrentMode(mode));
@@ -73,5 +73,3 @@ const WcmMode: FC = () => {
     </Section>
   );
 };
-
-export default WcmMode;

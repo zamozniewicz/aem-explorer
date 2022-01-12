@@ -1,8 +1,8 @@
 import { debugParam } from "../model/modes";
-import getCurrentTab from "./getCurrentTab";
-import isTab from "./isTab";
+import { getCurrentTab } from "./getCurrentTab";
+import { isTab } from "./isTab";
 
-const debugClientLibs = async (isDebugging: boolean) => {
+export const debugClientLibs = async (isDebugging: boolean) => {
   const tab = await getCurrentTab();
 
   if (!isTab(tab)) {
@@ -20,5 +20,3 @@ const debugClientLibs = async (isDebugging: boolean) => {
 
   chrome.tabs.update(tab.id, { url: url.toString() });
 };
-
-export default debugClientLibs;
