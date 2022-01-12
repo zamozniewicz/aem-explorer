@@ -1,4 +1,4 @@
-import { debugParam } from "../model/modes";
+import { debugClientLibsParam } from "../model/modes";
 import { getCurrentTab } from "./getCurrentTab";
 import { isTab } from "./isTab";
 
@@ -12,9 +12,9 @@ export const debugClientLibs = async (isDebugging: boolean) => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
   if (isDebugging) {
-    searchParams.set(debugParam, "true");
+    searchParams.set(debugClientLibsParam, "true");
   } else {
-    searchParams.delete(debugParam);
+    searchParams.delete(debugClientLibsParam);
   }
   url.search = searchParams.toString();
 

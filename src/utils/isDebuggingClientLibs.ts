@@ -1,4 +1,4 @@
-import { debugParam } from "../model/modes";
+import { debugClientLibsParam } from "../model/modes";
 import { getCurrentTab } from "./getCurrentTab";
 
 export const isDebuggingClientLibs = async (): Promise<boolean> => {
@@ -10,7 +10,7 @@ export const isDebuggingClientLibs = async (): Promise<boolean> => {
 
   const { search } = new URL(url);
   const searchParams = new URLSearchParams(search);
-  const debugClientLibs = searchParams.get(debugParam);
+  const debugClientLibs = searchParams.get(debugClientLibsParam);
 
   return Promise.resolve(debugClientLibs === "true");
 };

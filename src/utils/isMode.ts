@@ -1,5 +1,5 @@
-import { Mode, modes } from "../model/modes";
+import { WcmMode, wcmModes } from "../model/modes";
 
-export const isMode = (mode: string): mode is Mode => {
-  return modes.includes(mode as Mode);
+export const isMode = (mode: string): mode is WcmMode => {
+  return wcmModes.includes(mode as WcmMode);
 };

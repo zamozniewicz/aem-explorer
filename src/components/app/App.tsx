@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Box } from "@mui/material";
 import { ThemeContextProvider } from "../../contexts/ThemeContext";
 import { Footer } from "../footer/Footer";
-import { WcmMode } from "../wcm-mode/WcmMode";
+import { Mode } from "../mode/Mode";
 
 export const App: FC = () => {
   return (
@@ -13,7 +13,7 @@ export const App: FC = () => {
           pb: "56px",
         }}
       >
-        <WcmMode />
+        <Mode />
         <Footer />
       </Box>
     </ThemeContextProvider>

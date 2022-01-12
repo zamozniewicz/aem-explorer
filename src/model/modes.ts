@@ -1,5 +1,5 @@
 export const editorPath = "/editor.html";
-export const debugParam = "debugClientLibs";
-export const modeParam = "wcmmode";
-export const modes = ["disabled", "touch", "preview", "design"] as const;
-export type Mode = typeof modes[number];
+export const debugClientLibsParam = "debugClientLibs";
+export const wcmModeParam = "wcmmode";
+export const wcmModes = ["disabled", "touch", "preview", "design"] as const;
+export type WcmMode = typeof wcmModes[number];

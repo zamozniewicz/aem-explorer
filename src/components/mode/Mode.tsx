@@ -6,31 +6,31 @@ import {
   ToggleButton,
   Tooltip,
 } from "@mui/material";
-import { Mode, modes } from "../../model/modes";
+import { WcmMode, wcmModes } from "../../model/modes";
 import { setWcmMode } from "../../utils/setWcmMode";
-import { detectMode } from "../../utils/detectMode";
+import { detectWcmMode } from "../../utils/detectWcmMode";
 import { debugClientLibs } from "../../utils/debugClientLibs";
 import { Section } from "../section/Section";
 import { isDebuggingClientLibs } from "../../utils/isDebuggingClientLibs";
 
-const modeNames: Record<Mode, string> = {
+const modeNames: Record<WcmMode, string> = {
   disabled: "Disabled",
   touch: "Edit",
   preview: "Preview",
   design: "Design",
 };
 
-const modeTooltips: Record<Mode, string> = {
+const modeTooltips: Record<WcmMode, string> = {
   disabled: "WCM disabled",
   touch: "WCM in edit mode",
   preview: "WCM in preview mode",
   design: "WCM in design mode",
 };
 
-export const WcmMode: FC = () => {
-  const [currentMode, setCurrentMode] = useState<Mode | null>(null);
+export const Mode: FC = () => {
+  const [currentMode, setCurrentMode] = useState<WcmMode | null>(null);
   useEffect(() => {
-    detectMode().then((mode) => setCurrentMode(mode));
+    detectWcmMode().then((mode) => setCurrentMode(mode));
   }, []);
 
   const [debugChecked, setDebugChecked] = useState(false);
@@ -38,7 +38,7 @@ export const WcmMode: FC = () => {
     isDebuggingClientLibs().then((isDebugging) => setDebugChecked(isDebugging));
   }, []);
 
-  const handleModeChange = (mode: Mode) => {
+  const handleModeChange = (mode: WcmMode) => {
     setCurrentMode(mode);
     setWcmMode(mode);
   };
@@ -58,7 +58,7 @@ export const WcmMode: FC = () => {
         value={currentMode}
         onChange={(mode) => handleModeChange(mode)}
       >
-        {modes.map((mode) => (
+        {wcmModes.map((mode) => (
           <ToggleButton value={mode} key={mode}>
             <Tooltip title={modeTooltips[mode]}>
               <span>{modeNames[mode]}</span>

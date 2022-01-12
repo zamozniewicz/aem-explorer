@@ -1,8 +1,8 @@
-import { Mode, modeParam } from "../model/modes";
+import { WcmMode, wcmModeParam } from "../model/modes";
 import { getCurrentTab } from "./getCurrentTab";
 import { isMode } from "./isMode";
 
-export const detectMode = async (): Promise<Mode | null> => {
+export const detectWcmMode = async (): Promise<WcmMode | null> => {
   const { url } = await getCurrentTab();
 
   if (url === undefined) {
@@ -11,7 +11,7 @@ export const detectMode = async (): Promise<Mode | null> => {
 
   const { search } = new URL(url);
   const searchParams = new URLSearchParams(search);
-  const mode = searchParams.get(modeParam);
+  const mode = searchParams.get(wcmModeParam);
 
   if (mode === null) {
     return Promise.resolve("touch");
