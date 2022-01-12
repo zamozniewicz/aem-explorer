@@ -1,6 +1,6 @@
 import { debugClientLibsParam } from "../model/modes";
-import { getCurrentTab } from "./getCurrentTab";
-import { isTab } from "./isTab";
+import { getCurrentTab } from "./get-current-tab";
+import { isTab } from "./is-tab";
 
 export const debugClientLibs = async (isDebugging: boolean) => {
   const tab = await getCurrentTab();

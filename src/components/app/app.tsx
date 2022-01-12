@@ -4,10 +4,10 @@ import { css, Global } from "@emotion/react";
 import {
   ThemeContextProvider,
   useThemeContext,
-} from "../../contexts/ThemeContext";
-import { Footer } from "../footer/Footer";
-import { Mode } from "../mode/Mode";
-import { ClientLibs } from "../client-libs/ClientLibs";
+} from "../../contexts/theme-context";
+import { Footer } from "../footer/footer";
+import { Mode } from "../mode/mode";
+import { ClientLibs } from "../client-libs/client-libs";
 
 const muiTheme: Theme = createTheme({
   palette: {

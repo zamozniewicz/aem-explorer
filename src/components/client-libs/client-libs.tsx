@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { FormControlLabel, Switch } from "@mui/material";
-import { useThemeContext } from "../../contexts/ThemeContext";
-import { useDebug } from "../../hooks/useDebug";
-import { Section } from "../section/Section";
+import { useThemeContext } from "../../contexts/theme-context";
+import { useDebug } from "../../hooks/use-debug";
+import { Section } from "../section/section";
 
 export const ClientLibs: FC = () => {
   const { debug, handleDebugChange } = useDebug();

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
-import { useThemeContext } from "../../contexts/ThemeContext";
+import { useThemeContext } from "../../contexts/theme-context";
 
 export const Footer = () => {
   const { theme, toggleTheme } = useThemeContext();

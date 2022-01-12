@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { WcmMode } from "../model/modes";
-import { detectWcmMode } from "../utils/detectWcmMode";
-import { setWcmMode } from "../utils/setWcmMode";
+import { detectWcmMode } from "../utils/detect-wcm-mode";
+import { setWcmMode } from "../utils/set-wcm-mode";
 
 export const useCurrentWcmMode = () => {
   const [currentWcmMode, setCurrentWcmMode] = useState<WcmMode | null>(null);

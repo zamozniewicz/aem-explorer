@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { debugClientLibs } from "../utils/debugClientLibs";
-import { isDebuggingClientLibs } from "../utils/isDebuggingClientLibs";
+import { debugClientLibs } from "../utils/debug-client-libs";
+import { isDebuggingClientLibs } from "../utils/is-debugging-client-libs";
 
 export const useDebug = () => {
   const [debug, setDebug] = useState(false);

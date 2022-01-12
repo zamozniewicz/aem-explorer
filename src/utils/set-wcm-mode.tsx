@@ -1,7 +1,7 @@
 import { editorPath, WcmMode, wcmModeParam } from "../model/modes";
 import { Tab } from "../model/tab";
-import { getCurrentTab } from "./getCurrentTab";
-import { isTab } from "./isTab";
+import { getCurrentTab } from "./get-current-tab";
+import { isTab } from "./is-tab";
 
 const disableWcm = (tab: Tab): void => {
   const url = new URL(tab.url);

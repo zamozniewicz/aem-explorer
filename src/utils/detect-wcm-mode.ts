@@ -1,6 +1,6 @@
 import { WcmMode, wcmModeParam } from "../model/modes";
-import { getCurrentTab } from "./getCurrentTab";
-import { isMode } from "./isMode";
+import { getCurrentTab } from "./get-current-tab";
+import { isMode } from "./is-mode";
 
 export const detectWcmMode = async (): Promise<WcmMode | null> => {
   const { url } = await getCurrentTab();

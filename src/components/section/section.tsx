@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from "react";
 import { Box, Card, ToggleButtonGroup, Typography } from "@mui/material";
-import { useThemeContext } from "../../contexts/ThemeContext";
+import { useThemeContext } from "../../contexts/theme-context";
 
 interface Props {
   children: ReactNode;
