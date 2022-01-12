@@ -29,7 +29,7 @@ export const setWcmMode = async (mode: WcmMode) => {
 
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
-  if (mode === "touch") {
+  if (mode === "touch" || mode === null) {
     searchParams.delete(wcmModeParam);
   } else {
     searchParams.set(wcmModeParam, mode);
