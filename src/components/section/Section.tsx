@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactNode } from "react";
 import { Box, Paper, ToggleButtonGroup, Typography } from "@mui/material";
+import { useThemeContext } from "../../contexts/ThemeContext";
 
 interface Props {
   children: ReactNode;
@@ -14,7 +15,9 @@ export const Section = ({ children }: Props) => {
 };
 
 Section.Title = ({ children }: PropsWithChildren<{}>) => {
-  return (
+  const { theme } = useThemeContext();
+
+  return theme === "compact" ? null : (
     <Box>
       <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
         {children}
@@ -34,9 +37,11 @@ Section.Buttons = <T extends {}>({
   value,
   onChange,
 }: PropsWithChildren<SectionButtonsProps<T>>) => {
+  const { theme } = useThemeContext();
+
   return (
     <ToggleButtonGroup
-      size="small"
+      size={theme === "compact" ? "small" : "large"}
       color="primary"
       value={value}
       exclusive
