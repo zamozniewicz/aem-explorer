@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { Box, Button, Tooltip } from "@mui/material";
-import Footer from "../footer/Footer";
-import Section from "../section/Section";
+import { Box } from "@mui/material";
 import { ThemeContextProvider } from "../../contexts/ThemeContext";
+import Footer from "../footer/Footer";
+import WcmMode from "../wcm-mode/WcmMode";
 
 const App: FC = () => {
   return (
@@ -13,24 +13,7 @@ const App: FC = () => {
           pb: "56px",
         }}
       >
-        <Section>
-          <Section.Title>WCM mode</Section.Title>
-          <Section.Buttons>
-            <Tooltip title="WCM disabled">
-              <Button size="small">Disabled</Button>
-            </Tooltip>
-            <Tooltip title="WCM in edit mode">
-              <Button size="small">Edit</Button>
-            </Tooltip>
-            <Tooltip title="WCM in design mode">
-              <Button size="small">Design</Button>
-            </Tooltip>
-            <Tooltip title="WCM in preview mode">
-              <Button size="small">Preview</Button>
-            </Tooltip>
-          </Section.Buttons>
-        </Section>
-
+        <WcmMode />
         <Footer />
       </Box>
     </ThemeContextProvider>
