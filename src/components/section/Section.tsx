@@ -7,25 +7,19 @@ interface Props {
 
 const Section = ({ children }: Props) => {
   return (
-    <Paper elevation={2} sx={{ p: 1 }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-        }}
-      >
-        {children}
-      </Box>
+    <Paper elevation={1} sx={{ p: 1 }}>
+      {children}
     </Paper>
   );
 };
 
 Section.Title = ({ children }: PropsWithChildren<{}>) => {
   return (
-    <Typography variant="overline" component="h2">
-      {children}
-    </Typography>
+    <Box>
+      <Typography variant="subtitle2" component="h1" sx={{ mb: 1 }}>
+        {children}
+      </Typography>
+    </Box>
   );
 };
 

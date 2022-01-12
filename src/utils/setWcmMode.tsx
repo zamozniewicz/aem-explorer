@@ -1,11 +1,9 @@
 import { editorPath, Mode, modeParam } from "../model/modes";
+import { Tab } from "../model/tab";
 import getCurrentTab from "./getCurrentTab";
+import isTab from "./isTab";
 
-export const setWcmDisabled = (tab: chrome.tabs.Tab) => {
-  if (tab.id === undefined || tab.url === undefined) {
-    return;
-  }
-
+const disableWcm = (tab: Tab): void => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
   searchParams.set(modeParam, "disabled");
@@ -17,15 +15,15 @@ export const setWcmDisabled = (tab: chrome.tabs.Tab) => {
   chrome.tabs.update(tab.id, { url: url.toString() });
 };
 
-export const setWcmMode = async (mode: Mode) => {
+const setWcmMode = async (mode: Mode) => {
   const tab = await getCurrentTab();
 
-  if (mode === "disabled") {
-    setWcmDisabled(tab);
+  if (!isTab(tab)) {
     return;
   }
 
-  if (tab.id === undefined || tab.url === undefined) {
+  if (mode === "disabled") {
+    disableWcm(tab);
     return;
   }
 
@@ -44,3 +42,5 @@ export const setWcmMode = async (mode: Mode) => {
 
   chrome.tabs.update(tab.id, { url: url.toString() });
 };
+
+export default setWcmMode;
