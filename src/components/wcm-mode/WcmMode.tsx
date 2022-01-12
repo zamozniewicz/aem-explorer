@@ -38,8 +38,8 @@ const WcmMode: FC = () => {
         onChange={(mode) => handleChange(mode)}
       >
         {modes.map((mode) => (
-          <ToggleButton value={mode} size="small">
-            <Tooltip title={modeTooltips[mode]} key={mode}>
+          <ToggleButton value={mode} size="small" key={mode}>
+            <Tooltip title={modeTooltips[mode]}>
               <span>{modeNames[mode]}</span>
             </Tooltip>
           </ToggleButton>
