@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import {
   Box,
   FormControlLabel,
@@ -7,11 +7,9 @@ import {
   Tooltip,
 } from "@mui/material";
 import { WcmMode, wcmModes } from "../../model/modes";
-import { setWcmMode } from "../../utils/setWcmMode";
-import { detectWcmMode } from "../../utils/detectWcmMode";
-import { debugClientLibs } from "../../utils/debugClientLibs";
+import { useCurrentWcmMode } from "../../hooks/useCurrentWcmMode";
+import { useDebug } from "../../hooks/useDebug";
 import { Section } from "../section/Section";
-import { isDebuggingClientLibs } from "../../utils/isDebuggingClientLibs";
 
 const modeNames: Record<WcmMode, string> = {
   disabled: "Disabled",
@@ -28,35 +26,15 @@ const modeTooltips: Record<WcmMode, string> = {
 };
 
 export const Mode: FC = () => {
-  const [currentWcmMode, setCurrentWcmMode] = useState<WcmMode | null>(null);
-  useEffect(() => {
-    detectWcmMode().then((mode) => setCurrentWcmMode(mode));
-  }, []);
-
-  const [debugChecked, setDebugChecked] = useState(false);
-  useEffect(() => {
-    isDebuggingClientLibs().then((isDebugging) => setDebugChecked(isDebugging));
-  }, []);
-
-  const handleModeChange = (mode: WcmMode) => {
-    setCurrentWcmMode(mode);
-    setWcmMode(mode);
-  };
-
-  const handleDebugCheckedChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { checked } = event.target;
-    setDebugChecked(checked);
-    debugClientLibs(checked);
-  };
+  const { currentWcmMode, handleWcmModeChange } = useCurrentWcmMode();
+  const { debug, handleDebugChange } = useDebug();
 
   return (
     <Section>
       <Section.Title>WCM mode</Section.Title>
       <Section.Buttons
         value={currentWcmMode}
-        onChange={(mode) => handleModeChange(mode)}
+        onChange={(mode) => handleWcmModeChange(mode)}
       >
         {wcmModes.map((mode) => (
           <ToggleButton value={mode} key={mode}>
@@ -71,8 +49,10 @@ export const Mode: FC = () => {
           control={
             <Switch
               size="small"
-              checked={debugChecked}
-              onChange={handleDebugCheckedChange}
+              checked={debug}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                handleDebugChange(event.target.checked)
+              }
             />
           }
           label="Debug clientlibs"
