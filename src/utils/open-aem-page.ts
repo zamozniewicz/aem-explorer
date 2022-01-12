@@ -1,7 +1,8 @@
 import { getCurrentTab } from "./get-current-tab";
 import { isTab } from "./is-tab";
+import { openUrl } from "./open-url";
 
-export const openAemPage = async (pathname: string) => {
+export const openAemPage = async (pathname: string, openInNewTab: boolean) => {
   const tab = await getCurrentTab();
 
   if (!isTab(tab)) {
@@ -9,5 +10,6 @@ export const openAemPage = async (pathname: string) => {
   }
 
   const { origin } = new URL(tab.url);
-  chrome.tabs?.update(tab.id, { url: `${origin}${pathname}` });
+  const url = `${origin}${pathname}`;
+  openUrl({ tabId: tab.id, url, openInNewTab });
 };
