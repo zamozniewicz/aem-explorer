@@ -8,7 +8,7 @@ interface Props {
 
 export const Section = ({ children }: Props) => {
   return (
-    <Paper elevation={1} sx={{ p: 1 }}>
+    <Paper variant="outlined" elevation={1} sx={{ p: 1, mb: 2 }}>
       {children}
     </Paper>
   );

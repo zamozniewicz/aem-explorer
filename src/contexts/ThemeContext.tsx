@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo, useState } from "react";
+import React, { FC, useContext, useEffect, useMemo, useState } from "react";
 
 export type Theme = "compact" | "comfortable";
 
@@ -14,11 +14,30 @@ const ThemeContext = React.createContext<ThemeContextValues>({
   toggleTheme: () => {},
 });
 
+const themeStorageKey = "aemExplorerTheme";
+
 export const ThemeContextProvider: FC = ({ children }) => {
   const [theme, setTheme] = useState<Theme>("comfortable");
+  useEffect(() => {
+    if (chrome.storage === undefined) {
+      setTheme("comfortable");
+      return;
+    }
+
+    chrome.storage.sync.get(themeStorageKey, (result) => {
+      const savedTheme = result[themeStorageKey] || "comfortable";
+      setTheme(savedTheme);
+    });
+  }, []);
+
   const toggleTheme = () => {
     const nextTheme = theme === "comfortable" ? "compact" : "comfortable";
+
     setTheme(nextTheme);
+
+    if (chrome.storage) {
+      chrome.storage.sync.set({ [themeStorageKey]: nextTheme });
+    }
   };
 
   const value = useMemo(() => ({ theme, toggleTheme, setTheme }), [theme]);

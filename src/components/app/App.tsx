@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { ThemeContextProvider } from "../../contexts/ThemeContext";
 import { Footer } from "../footer/Footer";
 import { Mode } from "../mode/Mode";
+import { ClientLibs } from "../client-libs/ClientLibs";
 
 export const App: FC = () => {
   return (
@@ -14,6 +15,7 @@ export const App: FC = () => {
         }}
       >
         <Mode />
+        <ClientLibs />
         <Footer />
       </Box>
     </ThemeContextProvider>
