@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactNode } from "react";
-import { Box, Paper, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Card, ToggleButtonGroup, Typography } from "@mui/material";
 import { useThemeContext } from "../../contexts/ThemeContext";
 
 interface Props {
@@ -7,10 +7,17 @@ interface Props {
 }
 
 export const Section = ({ children }: Props) => {
+  const { theme } = useThemeContext();
+
   return (
-    <Paper variant="outlined" elevation={1} sx={{ p: 1, mb: 2 }}>
+    <Card
+      sx={{
+        p: 2,
+        mb: theme === "compact" ? 1 : 2,
+      }}
+    >
       {children}
-    </Paper>
+    </Card>
   );
 };
 
