@@ -16,7 +16,7 @@ export const Section = ({ children }: Props) => {
 Section.Title = ({ children }: PropsWithChildren<{}>) => {
   return (
     <Box>
-      <Typography variant="subtitle2" component="h1" sx={{ mb: 1 }}>
+      <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
         {children}
       </Typography>
     </Box>
@@ -40,6 +40,7 @@ Section.Buttons = <T extends {}>({
       color="primary"
       value={value}
       exclusive
+      fullWidth
       onChange={(event, nextValue) => onChange(nextValue)}
     >
       {children}

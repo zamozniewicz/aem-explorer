@@ -28,9 +28,9 @@ const modeTooltips: Record<WcmMode, string> = {
 };
 
 export const Mode: FC = () => {
-  const [currentMode, setCurrentMode] = useState<WcmMode | null>(null);
+  const [currentWcmMode, setCurrentWcmMode] = useState<WcmMode | null>(null);
   useEffect(() => {
-    detectWcmMode().then((mode) => setCurrentMode(mode));
+    detectWcmMode().then((mode) => setCurrentWcmMode(mode));
   }, []);
 
   const [debugChecked, setDebugChecked] = useState(false);
@@ -39,7 +39,7 @@ export const Mode: FC = () => {
   }, []);
 
   const handleModeChange = (mode: WcmMode) => {
-    setCurrentMode(mode);
+    setCurrentWcmMode(mode);
     setWcmMode(mode);
   };
 
@@ -55,7 +55,7 @@ export const Mode: FC = () => {
     <Section>
       <Section.Title>WCM mode</Section.Title>
       <Section.Buttons
-        value={currentMode}
+        value={currentWcmMode}
         onChange={(mode) => handleModeChange(mode)}
       >
         {wcmModes.map((mode) => (
@@ -66,7 +66,7 @@ export const Mode: FC = () => {
           </ToggleButton>
         ))}
       </Section.Buttons>
-      <Box sx={{ p: 1, mt: 1, display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ mt: 1.5, display: "flex", justifyContent: "flex-end" }}>
         <FormControlLabel
           control={
             <Switch
