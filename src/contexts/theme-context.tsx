@@ -25,12 +25,14 @@ export const ThemeContextProvider: FC = ({ children }) => {
     });
   }, []);
 
+  useEffect(() => {
+    chrome.storage?.sync.set({ [themeStorageKey]: theme });
+  }, [theme]);
+
   const toggleTheme = () => {
     const nextTheme = theme === "comfortable" ? "compact" : "comfortable";
 
     setTheme(nextTheme);
-
-    chrome.storage?.sync.set({ [themeStorageKey]: nextTheme });
   };
 
   const value = useMemo(() => ({ theme, toggleTheme, setTheme }), [theme]);

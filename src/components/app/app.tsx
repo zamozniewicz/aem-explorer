@@ -5,6 +5,10 @@ import {
   ThemeContextProvider,
   useThemeContext,
 } from "../../contexts/theme-context";
+import {
+  OpenInNewTabContextProvider,
+  useOpenInNewTabContext,
+} from "../../contexts/open-in-new-tab-context";
 import { Footer } from "../footer/footer";
 import { Mode } from "../mode/mode";
 import { ClientLibs } from "../client-libs/client-libs";
@@ -32,20 +36,22 @@ export const App: FC = () => {
       />
       <ThemeProvider theme={muiTheme}>
         <ThemeContextProvider>
-          <Container
-            maxWidth="sm"
-            sx={{
-              p: theme === "compact" ? 0 : 2,
-              pb: "56px",
-              bgcolor: "background.paper",
-              minHeight: "calc(100vh - 56px)",
-            }}
-          >
-            <Mode />
-            <ClientLibs />
-            <Links />
-            <Footer />
-          </Container>
+          <OpenInNewTabContextProvider>
+            <Container
+              maxWidth="sm"
+              sx={{
+                p: theme === "compact" ? 0 : 2,
+                pb: "56px",
+                bgcolor: "background.paper",
+                minHeight: "calc(100vh - 56px)",
+              }}
+            >
+              <Mode />
+              <ClientLibs />
+              <Links />
+              <Footer />
+            </Container>
+          </OpenInNewTabContextProvider>
         </ThemeContextProvider>
       </ThemeProvider>
     </>
