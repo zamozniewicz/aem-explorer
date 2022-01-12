@@ -10,7 +10,7 @@ const OpenInNewTabContext = React.createContext<OpenInNewTabContextValues>({
   toggleOpenInNewTab: () => {},
 });
 
-const openInNewTabStorageKey = "aemExplorerTheme";
+const openInNewTabStorageKey = "aemExplorerOpenInNewTab";
 
 export const OpenInNewTabContextProvider: FC = ({ children }) => {
   const [openInNewTab, setOpenInNewTab] = useState<boolean>(false);
