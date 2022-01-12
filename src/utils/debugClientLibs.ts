@@ -12,9 +12,9 @@ export const debugClientLibs = async (isDebugging: boolean) => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
   if (isDebugging) {
-    searchParams.delete(debugParam);
-  } else {
     searchParams.set(debugParam, "true");
+  } else {
+    searchParams.delete(debugParam);
   }
   url.search = searchParams.toString();
 

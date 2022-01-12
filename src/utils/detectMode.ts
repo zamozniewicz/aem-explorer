@@ -1,9 +1,6 @@
-import { Mode, modeParam, modes } from "../model/modes";
+import { Mode, modeParam } from "../model/modes";
 import { getCurrentTab } from "./getCurrentTab";
-
-const isMode = (mode: string): mode is Mode => {
-  return modes.includes(mode as Mode);
-};
+import { isMode } from "./isMode";
 
 export const detectMode = async (): Promise<Mode | null> => {
   const { url } = await getCurrentTab();

@@ -11,6 +11,7 @@ import { setWcmMode } from "../../utils/setWcmMode";
 import { detectMode } from "../../utils/detectMode";
 import { debugClientLibs } from "../../utils/debugClientLibs";
 import { Section } from "../section/Section";
+import { isDebuggingClientLibs } from "../../utils/isDebuggingClientLibs";
 
 const modeNames: Record<Mode, string> = {
   disabled: "Disabled",
@@ -32,19 +33,22 @@ export const WcmMode: FC = () => {
     detectMode().then((mode) => setCurrentMode(mode));
   }, []);
 
-  const [debugging, setDebugging] = useState(false);
+  const [debugChecked, setDebugChecked] = useState(false);
+  useEffect(() => {
+    isDebuggingClientLibs().then((isDebugging) => setDebugChecked(isDebugging));
+  }, []);
 
   const handleModeChange = (mode: Mode) => {
     setCurrentMode(mode);
     setWcmMode(mode);
   };
 
-  const handleDebuggingChange = (
+  const handleDebugCheckedChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const isDebugging = event.target.checked;
-    setDebugging(isDebugging);
-    debugClientLibs(isDebugging);
+    const { checked } = event.target;
+    setDebugChecked(checked);
+    debugClientLibs(checked);
   };
 
   return (
@@ -62,10 +66,14 @@ export const WcmMode: FC = () => {
           </ToggleButton>
         ))}
       </Section.Buttons>
-      <Box>
+      <Box sx={{ p: 1, mt: 1, display: "flex", justifyContent: "flex-end" }}>
         <FormControlLabel
           control={
-            <Switch checked={debugging} onChange={handleDebuggingChange} />
+            <Switch
+              size="small"
+              checked={debugChecked}
+              onChange={handleDebugCheckedChange}
+            />
           }
           label="Debug clientlibs"
         />
