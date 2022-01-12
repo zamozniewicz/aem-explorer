@@ -8,6 +8,7 @@ import {
 import { Footer } from "../footer/footer";
 import { Mode } from "../mode/mode";
 import { ClientLibs } from "../client-libs/client-libs";
+import { Links } from "../links/links";
 
 const muiTheme: Theme = createTheme({
   palette: {
@@ -42,6 +43,7 @@ export const App: FC = () => {
           >
             <Mode />
             <ClientLibs />
+            <Links />
             <Footer />
           </Container>
         </ThemeContextProvider>
