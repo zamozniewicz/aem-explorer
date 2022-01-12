@@ -12,7 +12,7 @@ const disableWcm = (tab: Tab): void => {
     url.pathname = url.pathname.replace(editorPath, "");
   }
 
-  chrome.tabs.update(tab.id, { url: url.toString() });
+  chrome.tabs?.update(tab.id, { url: url.toString() });
 };
 
 export const setWcmMode = async (mode: WcmMode) => {
@@ -40,5 +40,5 @@ export const setWcmMode = async (mode: WcmMode) => {
     url.pathname = `${editorPath}${url.pathname}`;
   }
 
-  chrome.tabs.update(tab.id, { url: url.toString() });
+  chrome.tabs?.update(tab.id, { url: url.toString() });
 };

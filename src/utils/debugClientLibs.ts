@@ -18,5 +18,5 @@ export const debugClientLibs = async (isDebugging: boolean) => {
   }
   url.search = searchParams.toString();
 
-  chrome.tabs.update(tab.id, { url: url.toString() });
+  chrome.tabs?.update(tab.id, { url: url.toString() });
 };

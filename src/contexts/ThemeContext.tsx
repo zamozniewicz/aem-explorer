@@ -19,12 +19,7 @@ const themeStorageKey = "aemExplorerTheme";
 export const ThemeContextProvider: FC = ({ children }) => {
   const [theme, setTheme] = useState<Theme>("comfortable");
   useEffect(() => {
-    if (chrome.storage === undefined) {
-      setTheme("comfortable");
-      return;
-    }
-
-    chrome.storage.sync.get(themeStorageKey, (result) => {
+    chrome.storage?.sync.get(themeStorageKey, (result) => {
       const savedTheme = result[themeStorageKey] || "comfortable";
       setTheme(savedTheme);
     });
@@ -35,9 +30,7 @@ export const ThemeContextProvider: FC = ({ children }) => {
 
     setTheme(nextTheme);
 
-    if (chrome.storage) {
-      chrome.storage.sync.set({ [themeStorageKey]: nextTheme });
-    }
+    chrome.storage?.sync.set({ [themeStorageKey]: nextTheme });
   };
 
   const value = useMemo(() => ({ theme, toggleTheme, setTheme }), [theme]);
