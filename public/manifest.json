@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "AEM Explorer",
   "description": "Easily navigate through AEM structure",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Adam Zamozniewicz",
   "permissions": [
     "activeTab",
