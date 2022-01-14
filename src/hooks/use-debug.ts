@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useOpenInNewTabContext } from "../contexts/open-in-new-tab-context";
 import { debugClientLibs } from "../utils/debug-client-libs";
 import { isDebuggingClientLibs } from "../utils/is-debugging-client-libs";
 
@@ -7,10 +8,11 @@ export const useDebug = () => {
   useEffect(() => {
     isDebuggingClientLibs().then((isDebugging) => setDebug(isDebugging));
   }, []);
+  const { openInNewTab } = useOpenInNewTabContext();
 
   const handleDebugChange = (isDebugging: boolean) => {
     setDebug(isDebugging);
-    debugClientLibs(isDebugging);
+    debugClientLibs(isDebugging, openInNewTab);
   };
 
   return { debug, handleDebugChange };

@@ -1,8 +1,12 @@
 import { debugClientLibsParam } from "../model/modes";
 import { getCurrentTab } from "./get-current-tab";
 import { isTab } from "./is-tab";
+import { openUrl } from "./open-url";
 
-export const debugClientLibs = async (isDebugging: boolean) => {
+export const debugClientLibs = async (
+  isDebugging: boolean,
+  openInNewTab: boolean
+) => {
   const tab = await getCurrentTab();
 
   if (!isTab(tab)) {
@@ -18,5 +22,5 @@ export const debugClientLibs = async (isDebugging: boolean) => {
   }
   url.search = searchParams.toString();
 
-  chrome.tabs?.update(tab.id, { url: url.toString() });
+  openUrl({ tabId: tab.id, url: url.toString(), openInNewTab });
 };
