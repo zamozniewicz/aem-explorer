@@ -14,6 +14,7 @@ export const AemLink: FC<AemLinkProps> = ({ pathname, text }) => {
       variant="contained"
       key={pathname}
       onClick={() => openAemPage(pathname, openInNewTab)}
+      sx={{ fontSize: 11, px: 1, py: 0.25 }}
     >
       {text}
     </Button>

@@ -18,7 +18,11 @@ export const Links: FC = () => {
               {title}
             </Typography>
           )}
-          <Stack sx={{ mb: 2 }} spacing={2} direction="row">
+          <Stack
+            sx={{ mb: theme === "comfortable" ? 2 : 1 }}
+            spacing={2}
+            direction="row"
+          >
             {links.map(({ pathname, label }) => (
               <AemLink key={pathname} pathname={pathname} text={label} />
             ))}
