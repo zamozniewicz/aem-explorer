@@ -1,6 +1,11 @@
 import { FC } from "react";
-import { createTheme, ThemeProvider, Theme, Container } from "@mui/material";
-import { css, Global } from "@emotion/react";
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  Container,
+  GlobalStyles,
+} from "@mui/material";
 import {
   ThemeContextProvider,
   useThemeContext,
@@ -23,14 +28,14 @@ export const App: FC = () => {
 
   return (
     <>
-      <Global
-        styles={css`
-          body {
-            margin: 0;
-            padding: 0;
-            min-width: 400px;
-          }
-        `}
+      <GlobalStyles
+        styles={{
+          body: {
+            margin: 0,
+            padding: 0,
+            minWidth: "400px",
+          },
+        }}
       />
       <ThemeProvider theme={muiTheme}>
         <ThemeContextProvider>
