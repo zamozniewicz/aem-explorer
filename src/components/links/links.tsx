@@ -1,14 +1,12 @@
 import { FC } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useThemeContext } from "../../contexts/theme-context";
-import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
-import { openAemPage } from "../../utils/open-aem-page";
 import { linksGroups } from "../../model/links";
 import { Section } from "../section/section";
+import { AemLink } from "../aem-link/aem-link";
 
 export const Links: FC = () => {
   const { theme } = useThemeContext();
-  const { openInNewTab } = useOpenInNewTabContext();
 
   return (
     <Section>
@@ -22,14 +20,7 @@ export const Links: FC = () => {
           )}
           <Stack sx={{ mb: 2 }} spacing={2} direction="row">
             {links.map(({ pathname, label }) => (
-              <Button
-                size="small"
-                variant="contained"
-                key={pathname}
-                onClick={() => openAemPage(pathname, openInNewTab)}
-              >
-                {label}
-              </Button>
+              <AemLink key={pathname} pathname={pathname} text={label} />
             ))}
           </Stack>
         </div>
