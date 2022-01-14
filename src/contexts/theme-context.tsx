@@ -9,18 +9,19 @@ interface ThemeContextValues {
 }
 
 const ThemeContext = React.createContext<ThemeContextValues>({
-  theme: "comfortable",
+  theme: "compact",
   setTheme: () => {},
   toggleTheme: () => {},
 });
 
 const themeStorageKey = "aemExplorerTheme";
+const defaultTheme: Theme = "compact";
 
 export const ThemeContextProvider: FC = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("comfortable");
+  const [theme, setTheme] = useState<Theme>(defaultTheme);
   useEffect(() => {
     chrome.storage?.sync.get(themeStorageKey, (result) => {
-      const savedTheme = result[themeStorageKey] || "comfortable";
+      const savedTheme = result[themeStorageKey] || defaultTheme;
       setTheme(savedTheme);
     });
   }, []);
