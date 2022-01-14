@@ -2,19 +2,23 @@ import { FC } from "react";
 import { Button } from "@mui/material";
 import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 import { openAemPage } from "../../utils/open-aem-page";
+import { useThemeContext } from "../../contexts/theme-context";
 
 type AemLinkProps = { pathname: string; text: string };
 
 export const AemLink: FC<AemLinkProps> = ({ pathname, text }) => {
   const { openInNewTab } = useOpenInNewTabContext();
+  const { theme } = useThemeContext();
+
+  const buttonStyles = theme === "compact" ? { px: 0.75, py: 0.125 } : {};
 
   return (
     <Button
       size="small"
+      sx={{ ...buttonStyles }}
       variant="contained"
       key={pathname}
       onClick={() => openAemPage(pathname, openInNewTab)}
-      sx={{ fontSize: 11, px: 1, py: 0.25 }}
     >
       {text}
     </Button>

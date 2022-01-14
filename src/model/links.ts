@@ -41,7 +41,7 @@ export const linksGroups: LinksGroup[] = [
       },
       {
         pathname: "/libs/cq/i18n/translator.html",
-        label: "Dictionaries",
+        label: "i18n",
       },
     ],
   },

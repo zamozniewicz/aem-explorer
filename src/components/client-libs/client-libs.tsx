@@ -30,7 +30,7 @@ export const ClientLibs: FC = () => {
           sx={{ ml: 2 }}
           control={
             <Switch
-              size={theme === "compact" ? "small" : "medium"}
+              size="small"
               checked={debug}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleDebugChange(event.target.checked)

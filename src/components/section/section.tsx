@@ -44,11 +44,9 @@ Section.Buttons = <T extends {}>({
   value,
   onChange,
 }: PropsWithChildren<SectionButtonsProps<T>>) => {
-  const { theme } = useThemeContext();
-
   return (
     <ToggleButtonGroup
-      size={theme === "compact" ? "small" : "large"}
+      size="small"
       color="primary"
       value={value}
       exclusive
