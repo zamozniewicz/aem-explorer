@@ -16,6 +16,7 @@ import { Mode } from "../mode/mode";
 import { ClientLibs } from "../client-libs/client-libs";
 import { Links } from "../links/links";
 import { CurrentPageMode } from "../current-page-mode/current-page-mode";
+import { Header } from "../header/header";
 
 const muiTheme: Theme = createTheme({
   palette: {
@@ -43,12 +44,13 @@ export const App: FC = () => {
             <Container
               maxWidth="sm"
               sx={{
-                p: theme === "compact" ? 0 : 2,
-                pb: "56px",
+                px: theme === "compact" ? 0 : 2,
+                py: "56px",
                 bgcolor: "background.paper",
                 minHeight: "calc(100vh - 56px)",
               }}
             >
+              <Header />
               <Mode />
               <ClientLibs />
               <CurrentPageMode />

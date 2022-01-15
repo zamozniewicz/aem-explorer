@@ -21,10 +21,6 @@ export const Footer = () => {
   return (
     <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
       <Toolbar>
-        <Stack direction="row" alignItems="center" spacing={1.5}>
-          <img src="icons/icon-128.png" alt="" width="20" height="20" />
-          <Typography variant="body1">AEM Explorer</Typography>
-        </Stack>
         <Box sx={{ flexGrow: 1 }} />
         <FormControlLabel
           sx={{ mx: 2 }}
