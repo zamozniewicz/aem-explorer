@@ -12,7 +12,8 @@ export const Section = ({ children }: Props) => {
   return (
     <Card
       sx={{
-        p: 2,
+        px: 2,
+        py: 1,
         mb: theme === "compact" ? 1 : 2,
       }}
     >
@@ -26,7 +27,7 @@ Section.Title = ({ children }: PropsWithChildren<{}>) => {
 
   return theme === "compact" ? null : (
     <Box>
-      <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
+      <Typography variant="subtitle1" component="h2" sx={{ mb: 1 }}>
         {children}
       </Typography>
     </Box>

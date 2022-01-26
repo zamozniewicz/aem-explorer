@@ -10,7 +10,6 @@ export const Links: FC = () => {
 
   return (
     <Section>
-      <Section.Title>Links</Section.Title>
       {linksGroups.map(({ title, id, links }) => (
         <div key={id}>
           {theme === "comfortable" && (
