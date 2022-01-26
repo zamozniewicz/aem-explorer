@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4 (January, 27, 2022)
+
+* Improve theme
+
 ## 0.0.3 (January 24, 2022)
 
 * Add a header with logo and extension name
