@@ -17,7 +17,7 @@ export const Footer = () => {
   const { openInNewTab, toggleOpenInNewTab } = useOpenInNewTabContext();
 
   return (
-    <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
+    <AppBar position="sticky" color="primary" sx={{ top: "auto", bottom: 0 }}>
       <Toolbar>
         <Box sx={{ flexGrow: 1 }} />
         <FormControlLabel

@@ -5,6 +5,7 @@ import {
   Theme,
   Container,
   GlobalStyles,
+  Box,
 } from "@mui/material";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -49,16 +50,16 @@ export const App: FC = () => {
               maxWidth="sm"
               sx={{
                 px: theme === "compact" ? 0 : 2,
-                py: "56px",
                 bgcolor: "background.paper",
-                minHeight: "calc(100vh - 56px)",
               }}
             >
               <Header />
-              <Mode />
-              <ClientLibs />
-              <CurrentPageMode />
-              <Links />
+              <Box sx={{ mt: theme === "compact" ? 1 : 2 }}>
+                <Mode />
+                <ClientLibs />
+                <CurrentPageMode />
+                <Links />
+              </Box>
               <Footer />
             </Container>
           </OpenInNewTabContextProvider>
