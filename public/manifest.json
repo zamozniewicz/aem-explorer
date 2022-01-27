@@ -6,7 +6,17 @@
   "author": "Adam Zamozniewicz",
   "permissions": [
     "activeTab",
+    "contextMenus",
     "storage"
+  ],
+  "background": {
+    "service_worker": "./static/js/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./static/js/content.js"]
+    }
   ],
   "icons": {
     "16": "icons/icon-16.png",
