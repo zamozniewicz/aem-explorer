@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.0.4 (January, 27, 2022)
+## 0.0.5 (January 27, 2022)
+
+* Add context menu for switching WCM modes
+
+## 0.0.4 (January 27, 2022)
 
 * Improve theme
 
