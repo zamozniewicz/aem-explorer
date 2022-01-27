@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6 (January 28, 2022)
+
+* Show context menus in all context
+
 ## 0.0.5 (January 27, 2022)
 
 * Add context menu for switching WCM modes
