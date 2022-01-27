@@ -16,7 +16,7 @@ const getDisabledWcmUrl = (tab: Tab): string => {
   return url.toString();
 };
 
-export const setWcmMode = async (mode: WcmMode, openInNewTab: boolean) => {
+export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
   const tab = await getCurrentTab();
 
   if (!isTab(tab)) {

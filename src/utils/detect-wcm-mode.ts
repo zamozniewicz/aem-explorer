@@ -1,6 +1,6 @@
-import { WcmMode, wcmModeParam } from "../model/modes";
+import { WcmMode, wcmModeParam, wcmModes } from "../model/modes";
 import { getCurrentTab } from "./get-current-tab";
-import { isMode } from "./is-mode";
+import { includes } from "./includes";
 
 export const detectWcmMode = async (): Promise<WcmMode | null> => {
   const { url } = await getCurrentTab();
@@ -17,7 +17,7 @@ export const detectWcmMode = async (): Promise<WcmMode | null> => {
     return Promise.resolve("touch");
   }
 
-  if (isMode(mode)) {
+  if (includes(wcmModes, mode)) {
     return Promise.resolve(mode);
   }
 
