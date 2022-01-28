@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7 (January 28, 2022)
+
+* Fix switching between Preview and Edit mode by setting cookies
+
 ## 0.0.6 (January 28, 2022)
 
 * Show context menus in all context
