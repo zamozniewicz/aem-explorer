@@ -16,6 +16,30 @@ const getDisabledWcmUrl = (tab: Tab): string => {
   return url.toString();
 };
 
+const getCookieUrl = (tab: Tab): string => {
+  const { protocol, hostname } = new URL(tab.url);
+
+  return `${protocol}//${hostname}`;
+};
+
+const setCookies = async (
+  tab: Tab,
+  cookies: Array<{ name: string; value: string }>
+) => {
+  const url = getCookieUrl(tab);
+
+  const pending = cookies.map(({ name, value }) => {
+    return chrome.cookies.set({
+      url,
+      path: "/",
+      name,
+      value,
+    });
+  });
+
+  return Promise.all(pending);
+};
+
 export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
   const tab = await getCurrentTab();
 
@@ -24,13 +48,27 @@ export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
   }
 
   if (mode === "disabled") {
-    const url = getDisabledWcmUrl(tab);
     openUrl({
       tabId: tab.id,
-      url,
+      url: getDisabledWcmUrl(tab),
       openInNewTab,
     });
     return;
+  }
+
+  if (mode === "preview") {
+    await setCookies(tab, [
+      { name: "wcmmode", value: "preview" },
+      { name: "cq-editor-layer.page", value: "Preview" },
+      { name: "cq-editor-sidepanel", value: "closed" },
+    ]);
+  }
+
+  if (mode === "touch") {
+    await setCookies(tab, [
+      { name: "wcmmode", value: "edit" },
+      { name: "cq-editor-layer.page", value: "Edit" },
+    ]);
   }
 
   const url = new URL(tab.url);
