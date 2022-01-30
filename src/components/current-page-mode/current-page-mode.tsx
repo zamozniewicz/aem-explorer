@@ -70,7 +70,10 @@ export const CurrentPageMode: FC = () => {
   return (
     <Section>
       <Section.Title>Open current path in</Section.Title>
-      <ButtonGroup fullWidth size={themeSize === "compact" ? "small" : "large"}>
+      <ButtonGroup
+        fullWidth
+        size={themeSize === "compact" ? "small" : "medium"}
+      >
         <Tooltip title="Open current page in Edit mode">
           <Button onClick={() => openInPageMode("edit", openInNewTab)}>
             Edit
