@@ -1,12 +1,5 @@
 import { FC } from "react";
-import {
-  createTheme,
-  ThemeProvider,
-  Theme,
-  Container,
-  GlobalStyles,
-  Box,
-} from "@mui/material";
+import { Container, GlobalStyles, Box } from "@mui/material";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -23,14 +16,8 @@ import { Links } from "../links/links";
 import { CurrentPageMode } from "../current-page-mode/current-page-mode";
 import { Header } from "../header/header";
 
-const muiTheme: Theme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
 export const App: FC = () => {
-  const { theme } = useThemeContext();
+  const { themeSize } = useThemeContext();
 
   return (
     <>
@@ -43,28 +30,26 @@ export const App: FC = () => {
           },
         }}
       />
-      <ThemeProvider theme={muiTheme}>
-        <ThemeContextProvider>
-          <OpenInNewTabContextProvider>
-            <Container
-              maxWidth="sm"
-              sx={{
-                px: theme === "compact" ? 0 : 2,
-                bgcolor: "background.paper",
-              }}
-            >
-              <Header />
-              <Box sx={{ mt: theme === "compact" ? 1 : 2 }}>
-                <Mode />
-                <ClientLibs />
-                <CurrentPageMode />
-                <Links />
-              </Box>
-              <Footer />
-            </Container>
-          </OpenInNewTabContextProvider>
-        </ThemeContextProvider>
-      </ThemeProvider>
+      <ThemeContextProvider>
+        <OpenInNewTabContextProvider>
+          <Container
+            maxWidth="sm"
+            sx={{
+              px: themeSize === "compact" ? 0 : 2,
+              bgcolor: "background.paper",
+            }}
+          >
+            <Header />
+            <Box sx={{ mt: themeSize === "compact" ? 1 : 2 }}>
+              <Mode />
+              <ClientLibs />
+              <CurrentPageMode />
+              <Links />
+            </Box>
+            <Footer />
+          </Container>
+        </OpenInNewTabContextProvider>
+      </ThemeContextProvider>
     </>
   );
 };

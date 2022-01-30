@@ -8,7 +8,7 @@ import { Section } from "../section/section";
 
 export const ClientLibs: FC = () => {
   const { debug, handleDebugChange } = useDebug();
-  const { theme } = useThemeContext();
+  const { themeSize } = useThemeContext();
   const { openInNewTab } = useOpenInNewTabContext();
 
   return (
@@ -16,7 +16,7 @@ export const ClientLibs: FC = () => {
       <Section.Title>ClientLibs</Section.Title>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          size={theme === "compact" ? "small" : "medium"}
+          size={themeSize === "compact" ? "small" : "medium"}
           onClick={() =>
             openAemPage(
               "/libs/granite/ui/content/dumplibs.rebuild.html",
