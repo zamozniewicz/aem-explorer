@@ -8,9 +8,9 @@ type AemLinkProps = { pathname: string; text: string };
 
 export const AemLink: FC<AemLinkProps> = ({ pathname, text }) => {
   const { openInNewTab } = useOpenInNewTabContext();
-  const { theme } = useThemeContext();
+  const { themeSize } = useThemeContext();
 
-  const buttonStyles = theme === "compact" ? { px: 0.75, py: 0.125 } : {};
+  const buttonStyles = themeSize === "compact" ? { px: 0.75, py: 0.125 } : {};
 
   return (
     <Button

@@ -1,45 +1,97 @@
 import React, { FC, useContext, useEffect, useMemo, useState } from "react";
+import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material";
 
-export type Theme = "compact" | "comfortable";
+export type ThemeSize = "compact" | "comfortable";
+export type ThemeBrightness = "light" | "dark";
 
 interface ThemeContextValues {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
+  themeSize: ThemeSize;
+  toggleThemeSize: () => void;
+  themeBrightness: ThemeBrightness;
+  toggleThemeBrightness: () => void;
 }
 
 const ThemeContext = React.createContext<ThemeContextValues>({
-  theme: "compact",
-  setTheme: () => {},
-  toggleTheme: () => {},
+  themeSize: "compact",
+  toggleThemeSize: () => {},
+  themeBrightness: "dark",
+  toggleThemeBrightness: () => {},
 });
 
-const themeStorageKey = "aemExplorerTheme";
-const defaultTheme: Theme = "compact";
+const themeSizeStorageKey = "aemExplorerThemeSize";
+const themeBrigthnessStorageKey = "aemExplorerThemeBrigthness";
+const defaultThemeSize: ThemeSize = "compact";
+const defaultThemeBrightness: ThemeBrightness = "dark";
+
+const light: ThemeOptions = {
+  palette: {
+    mode: "light",
+  },
+};
+
+const dark: ThemeOptions = {
+  palette: {
+    mode: "dark",
+  },
+};
 
 export const ThemeContextProvider: FC = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [themeSize, setThemeSize] = useState<ThemeSize>(defaultThemeSize);
   useEffect(() => {
-    chrome.storage?.sync.get(themeStorageKey, (result) => {
-      const savedTheme = result[themeStorageKey] || defaultTheme;
-      setTheme(savedTheme);
+    chrome.storage?.sync.get(themeSizeStorageKey, (result) => {
+      const savedTheme = result[themeSizeStorageKey] || defaultThemeSize;
+      setThemeSize(savedTheme);
     });
   }, []);
-
   useEffect(() => {
-    chrome.storage?.sync.set({ [themeStorageKey]: theme });
-  }, [theme]);
+    chrome.storage?.sync.set({ [themeSizeStorageKey]: themeSize });
+  }, [themeSize]);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "comfortable" ? "compact" : "comfortable";
+  const [themeBrightness, setThemeBrightness] = useState<ThemeBrightness>(
+    defaultThemeBrightness
+  );
+  useEffect(() => {
+    chrome.storage?.sync.get(themeBrigthnessStorageKey, (result) => {
+      const savedTheme =
+        result[themeBrigthnessStorageKey] || defaultThemeBrightness;
+      setThemeBrightness(savedTheme);
+    });
+  }, []);
+  useEffect(() => {
+    chrome.storage?.sync.set({ [themeBrigthnessStorageKey]: themeBrightness });
+  }, [themeBrightness]);
 
-    setTheme(nextTheme);
+  const toggleThemeSize = () => {
+    const nextThemeSize =
+      themeSize === "comfortable" ? "compact" : "comfortable";
+
+    setThemeSize(nextThemeSize);
   };
 
-  const value = useMemo(() => ({ theme, toggleTheme, setTheme }), [theme]);
+  const toggleThemeBrightness = () => {
+    const nextThemeBrigthness = themeBrightness === "light" ? "dark" : "light";
+
+    setThemeBrightness(nextThemeBrigthness);
+  };
+
+  const value = useMemo(
+    () => ({
+      themeSize,
+      toggleThemeSize,
+      themeBrightness,
+      toggleThemeBrightness,
+    }),
+    [themeSize, themeBrightness]
+  );
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeProvider
+      theme={
+        themeBrightness === "dark" ? createTheme(dark) : createTheme(light)
+      }
+    >
+      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    </ThemeProvider>
   );
 };
 

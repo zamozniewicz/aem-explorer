@@ -6,13 +6,13 @@ import { Section } from "../section/section";
 import { AemLink } from "../aem-link/aem-link";
 
 export const Links: FC = () => {
-  const { theme } = useThemeContext();
+  const { themeSize } = useThemeContext();
 
   return (
     <Section>
       {linksGroups.map(({ title, id, links }) => (
         <div key={id}>
-          {theme === "comfortable" && (
+          {themeSize === "comfortable" && (
             <Typography variant="body1" component="h3" sx={{ mb: 1 }}>
               {title}
             </Typography>

@@ -7,19 +7,21 @@ import {
   FormControlLabel,
   Switch,
 } from "@mui/material";
+import DarkMode from "@mui/icons-material/DarkMode";
+import LightMode from "@mui/icons-material/LightMode";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import { useThemeContext } from "../../contexts/theme-context";
 import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 
 export const Footer = () => {
-  const { theme, toggleTheme } = useThemeContext();
+  const { themeSize, toggleThemeSize, themeBrightness, toggleThemeBrightness } =
+    useThemeContext();
   const { openInNewTab, toggleOpenInNewTab } = useOpenInNewTabContext();
 
   return (
     <AppBar position="sticky" color="primary" sx={{ top: "auto", bottom: 0 }}>
       <Toolbar>
-        <Box sx={{ flexGrow: 1 }} />
         <FormControlLabel
           sx={{ mx: 2 }}
           control={
@@ -31,19 +33,38 @@ export const Footer = () => {
           }
           label="Open in new tab"
         />
+
+        <Box sx={{ flexGrow: 1 }} />
+
         <Tooltip
-          title={
-            theme === "comfortable"
-              ? "Switch to compact theme"
-              : "Switch to comfortable theme"
-          }
+          title={`Switch to
+            ${themeBrightness === "dark" ? "light" : "dark"}
+          theme`}
         >
           <IconButton
             size="small"
             color="inherit"
-            onClick={() => toggleTheme()}
+            onClick={() => toggleThemeBrightness()}
           >
-            {theme === "comfortable" ? <UnfoldLessIcon /> : <UnfoldMoreIcon />}
+            {themeBrightness === "light" ? <LightMode /> : <DarkMode />}
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip
+          title={`Switch to ${
+            themeSize === "comfortable" ? "compact" : "comfortable"
+          } theme`}
+        >
+          <IconButton
+            size="small"
+            color="inherit"
+            onClick={() => toggleThemeSize()}
+          >
+            {themeSize === "comfortable" ? (
+              <UnfoldMoreIcon />
+            ) : (
+              <UnfoldLessIcon />
+            )}
           </IconButton>
         </Tooltip>
       </Toolbar>
