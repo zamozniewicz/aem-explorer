@@ -17,7 +17,7 @@ import { CurrentPageMode } from "../current-page-mode/current-page-mode";
 import { Header } from "../header/header";
 
 export const App: FC = () => {
-  const { themeSize } = useThemeContext();
+  const { theme } = useThemeContext();
 
   return (
     <>
@@ -35,12 +35,12 @@ export const App: FC = () => {
           <Container
             maxWidth="sm"
             sx={{
-              px: themeSize === "compact" ? 0 : 2,
+              px: theme.size === "compact" ? 0 : 2,
               bgcolor: "background.paper",
             }}
           >
             <Header />
-            <Box sx={{ mt: themeSize === "compact" ? 1 : 2 }}>
+            <Box sx={{ mt: theme.size === "compact" ? 1 : 2 }}>
               <Mode />
               <ClientLibs />
               <CurrentPageMode />

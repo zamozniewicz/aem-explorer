@@ -64,7 +64,7 @@ const openInPageMode = async (pageMode: PageMode, openInNewTab: boolean) => {
 };
 
 export const CurrentPageMode: FC = () => {
-  const { themeSize } = useThemeContext();
+  const { theme } = useThemeContext();
   const { openInNewTab } = useOpenInNewTabContext();
 
   return (
@@ -72,7 +72,7 @@ export const CurrentPageMode: FC = () => {
       <Section.Title>Open current path in</Section.Title>
       <ButtonGroup
         fullWidth
-        size={themeSize === "compact" ? "small" : "medium"}
+        size={theme.size === "compact" ? "small" : "medium"}
       >
         <Tooltip title="Open current page in Edit mode">
           <Button onClick={() => openInPageMode("edit", openInNewTab)}>

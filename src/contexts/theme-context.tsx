@@ -1,94 +1,98 @@
-import React, { FC, useContext, useEffect, useMemo, useState } from "react";
+import React, { FC, useContext, useEffect, useMemo, useReducer } from "react";
 import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material";
 
-export type ThemeSize = "compact" | "comfortable";
-export type ThemeBrightness = "light" | "dark";
-
-interface ThemeContextValues {
-  themeSize: ThemeSize;
-  toggleThemeSize: () => void;
-  themeBrightness: ThemeBrightness;
-  toggleThemeBrightness: () => void;
-}
-
-const ThemeContext = React.createContext<ThemeContextValues>({
-  themeSize: "compact",
-  toggleThemeSize: () => {},
-  themeBrightness: "dark",
-  toggleThemeBrightness: () => {},
-});
-
-const themeSizeStorageKey = "aemExplorerThemeSize";
-const themeBrigthnessStorageKey = "aemExplorerThemeBrigthness";
-const defaultThemeSize: ThemeSize = "compact";
-const defaultThemeBrightness: ThemeBrightness = "dark";
+const themeStorageKey = "aemExplorerTheme";
 
 const light: ThemeOptions = {
-  palette: {
-    mode: "light",
-  },
+  palette: { mode: "light" },
 };
 
 const dark: ThemeOptions = {
-  palette: {
-    mode: "dark",
-  },
+  palette: { mode: "dark" },
+};
+
+export type Theme = {
+  size: "compact" | "comfortable";
+  color: "light" | "dark";
+};
+
+const initialState: Theme = {
+  size: "compact",
+  color: "dark",
+};
+
+const ThemeContext = React.createContext<{
+  theme: Theme;
+  toggleThemeSize: () => void;
+  toggleThemeColor: () => void;
+}>({
+  theme: initialState,
+  toggleThemeSize: () => {},
+  toggleThemeColor: () => {},
+});
+
+type ThemeAction =
+  | { type: "reset"; payload: Theme }
+  | { type: "size"; payload: Theme["size"] }
+  | { type: "color"; payload: Theme["color"] };
+
+const themeReducer = (state: Theme, action: ThemeAction): Theme => {
+  switch (action.type) {
+    case "reset": {
+      return action.payload;
+    }
+    case "size": {
+      return { ...state, size: action.payload };
+    }
+    case "color": {
+      return { ...state, color: action.payload };
+    }
+    default: {
+      return state;
+    }
+  }
 };
 
 export const ThemeContextProvider: FC = ({ children }) => {
-  const [themeSize, setThemeSize] = useState<ThemeSize>(defaultThemeSize);
+  const [theme, themeDispatch] = useReducer(themeReducer, initialState);
   useEffect(() => {
-    chrome.storage?.sync.get(themeSizeStorageKey, (result) => {
-      const savedTheme = result[themeSizeStorageKey] || defaultThemeSize;
-      setThemeSize(savedTheme);
+    chrome.storage?.sync.get(themeStorageKey, (result) => {
+      const savedTheme = result[themeStorageKey];
+      if (savedTheme) {
+        themeDispatch({ type: "reset", payload: savedTheme });
+      }
     });
   }, []);
   useEffect(() => {
-    chrome.storage?.sync.set({ [themeSizeStorageKey]: themeSize });
-  }, [themeSize]);
-
-  const [themeBrightness, setThemeBrightness] = useState<ThemeBrightness>(
-    defaultThemeBrightness
-  );
-  useEffect(() => {
-    chrome.storage?.sync.get(themeBrigthnessStorageKey, (result) => {
-      const savedTheme =
-        result[themeBrigthnessStorageKey] || defaultThemeBrightness;
-      setThemeBrightness(savedTheme);
-    });
-  }, []);
-  useEffect(() => {
-    chrome.storage?.sync.set({ [themeBrigthnessStorageKey]: themeBrightness });
-  }, [themeBrightness]);
+    chrome.storage?.sync.set({ [themeStorageKey]: theme });
+  }, [theme]);
 
   const toggleThemeSize = () => {
-    const nextThemeSize =
-      themeSize === "comfortable" ? "compact" : "comfortable";
-
-    setThemeSize(nextThemeSize);
+    themeDispatch({
+      type: "size",
+      payload: theme.size === "comfortable" ? "compact" : "comfortable",
+    });
   };
 
-  const toggleThemeBrightness = () => {
-    const nextThemeBrigthness = themeBrightness === "light" ? "dark" : "light";
-
-    setThemeBrightness(nextThemeBrigthness);
+  const toggleThemeColor = () => {
+    themeDispatch({
+      type: "color",
+      payload: theme.color === "light" ? "dark" : "light",
+    });
   };
 
   const value = useMemo(
     () => ({
-      themeSize,
+      theme,
       toggleThemeSize,
-      themeBrightness,
-      toggleThemeBrightness,
+      toggleThemeColor,
     }),
-    [themeSize, themeBrightness]
+    [theme]
   );
 
   return (
     <ThemeProvider
-      theme={
-        themeBrightness === "dark" ? createTheme(dark) : createTheme(light)
-      }
+      theme={theme.color === "dark" ? createTheme(dark) : createTheme(light)}
     >
       <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
     </ThemeProvider>

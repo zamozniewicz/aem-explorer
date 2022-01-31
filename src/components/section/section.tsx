@@ -7,14 +7,14 @@ interface Props {
 }
 
 export const Section = ({ children }: Props) => {
-  const { themeSize } = useThemeContext();
+  const { theme } = useThemeContext();
 
   return (
     <Card
       sx={{
         px: 2,
         py: 1,
-        mb: themeSize === "compact" ? 1 : 2,
+        mb: theme.size === "compact" ? 1 : 2,
       }}
     >
       {children}
@@ -23,9 +23,9 @@ export const Section = ({ children }: Props) => {
 };
 
 Section.Title = ({ children }: PropsWithChildren<{}>) => {
-  const { themeSize } = useThemeContext();
+  const { theme } = useThemeContext();
 
-  return themeSize === "compact" ? null : (
+  return theme.size === "compact" ? null : (
     <Box>
       <Typography variant="subtitle1" component="h2" sx={{ mb: 1 }}>
         {children}
