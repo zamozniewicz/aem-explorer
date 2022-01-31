@@ -15,8 +15,7 @@ import { useThemeContext } from "../../contexts/theme-context";
 import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 
 export const Footer = () => {
-  const { themeSize, toggleThemeSize, themeBrightness, toggleThemeBrightness } =
-    useThemeContext();
+  const { theme, toggleThemeSize, toggleThemeColor } = useThemeContext();
   const { openInNewTab, toggleOpenInNewTab } = useOpenInNewTabContext();
 
   return (
@@ -38,21 +37,21 @@ export const Footer = () => {
 
         <Tooltip
           title={`Switch to
-            ${themeBrightness === "dark" ? "light" : "dark"}
+            ${theme.color === "dark" ? "light" : "dark"}
           theme`}
         >
           <IconButton
             size="small"
             color="inherit"
-            onClick={() => toggleThemeBrightness()}
+            onClick={() => toggleThemeColor()}
           >
-            {themeBrightness === "light" ? <LightMode /> : <DarkMode />}
+            {theme.color === "light" ? <LightMode /> : <DarkMode />}
           </IconButton>
         </Tooltip>
 
         <Tooltip
           title={`Switch to ${
-            themeSize === "comfortable" ? "compact" : "comfortable"
+            theme.size === "comfortable" ? "compact" : "comfortable"
           } theme`}
         >
           <IconButton
@@ -60,7 +59,7 @@ export const Footer = () => {
             color="inherit"
             onClick={() => toggleThemeSize()}
           >
-            {themeSize === "comfortable" ? (
+            {theme.size === "comfortable" ? (
               <UnfoldMoreIcon />
             ) : (
               <UnfoldLessIcon />
