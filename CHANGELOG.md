@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.8 (February 1, 2022)
+
+* Add light mode
+* Minor theme improvements
+
 ## 0.0.7 (January 28, 2022)
 
 * Fix switching between Preview and Edit mode by setting cookies
