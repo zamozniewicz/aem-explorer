@@ -23,7 +23,7 @@ jobs:
       matrix:
         platform: [ ubuntu-latest ]
         node: [ '16' ]
-    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
+    name: test
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@master
@@ -44,7 +44,7 @@ jobs:
         node-version: '16'
     - run: npm install
     - run: npm run build
-    - uses: paambaati/codeclimate-action@v2.2.4
+    - uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
       with:
