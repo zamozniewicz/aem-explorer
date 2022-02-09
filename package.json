@@ -58,5 +58,15 @@
       "last 1 chrome version",
       "last 1 firefox version"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*/*.d.ts",
+      "!src/reportWebVitals.ts",
+      "!src/model/*.ts",
+      "!src/scripts/*.ts",
+      "!src/index.tsx"
+    ]
   }
 }
