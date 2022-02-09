@@ -6,7 +6,12 @@ export const Header: FC = () => {
     <AppBar position="sticky" color="primary">
       <Toolbar>
         <Stack direction="row" alignItems="center" spacing={1.5}>
-          <img src="icons/icon-128.png" alt="" width="20" height="20" />
+          <img
+            src="icons/icon-128.png"
+            alt="AEM Explorer logo"
+            width="20"
+            height="20"
+          />
           <Typography variant="body1">AEM Explorer</Typography>
         </Stack>
       </Toolbar>
