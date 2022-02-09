@@ -21,7 +21,7 @@ const initialState: Theme = {
   color: "dark",
 };
 
-const ThemeContext = React.createContext<{
+export const ThemeContext = React.createContext<{
   theme: Theme;
   toggleThemeSize: () => void;
   toggleThemeColor: () => void;

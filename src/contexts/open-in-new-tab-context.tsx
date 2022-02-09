@@ -5,10 +5,11 @@ interface OpenInNewTabContextValues {
   toggleOpenInNewTab: () => void;
 }
 
-const OpenInNewTabContext = React.createContext<OpenInNewTabContextValues>({
-  openInNewTab: false,
-  toggleOpenInNewTab: () => {},
-});
+export const OpenInNewTabContext =
+  React.createContext<OpenInNewTabContextValues>({
+    openInNewTab: false,
+    toggleOpenInNewTab: () => {},
+  });
 
 const openInNewTabStorageKey = "aemExplorerOpenInNewTab";
 
