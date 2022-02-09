@@ -8,7 +8,7 @@
     "build": "GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false craco build",
     "build:local": "INLINE_RUNTIME_CHUNK=false craco build",
     "test": "react-scripts test",
-    "test:coverage": "npm test -- --coverage --watchAll=false",
+    "coverage": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .ts,.tsx src"
   },
