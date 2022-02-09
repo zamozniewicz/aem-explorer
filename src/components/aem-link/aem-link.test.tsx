@@ -11,10 +11,14 @@ jest.mock("../../contexts/open-in-new-tab-context", () => ({
 }));
 
 describe("AemLink component", () => {
-  let mockOpenAemPage: jest.Mock;
+  const mockOpenAemPage = jest.fn();
+
   beforeEach(() => {
-    mockOpenAemPage = jest.fn();
-    (useAemPage as jest.Mock).mockReturnValue({
+    jest.clearAllMocks();
+  });
+
+  beforeEach(() => {
+    (useAemPage as jest.MockedFunction<typeof useAemPage>).mockReturnValue({
       openAemPage: mockOpenAemPage,
     });
   });
