@@ -1,4 +1,4 @@
-import { waitFor } from "@testing-library/dom";
+import { waitFor } from "@testing-library/react";
 import { debugClientLibs } from "./debug-client-libs";
 import { getCurrentTab } from "./get-current-tab";
 import { openUrl } from "./open-url";

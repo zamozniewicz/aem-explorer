@@ -7,7 +7,8 @@
     "plugin:react/recommended",
     "airbnb",
     "airbnb-typescript",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:testing-library/react"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -16,7 +17,8 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "testing-library"
   ],
   "rules": {
     "import/prefer-default-export": "off",
