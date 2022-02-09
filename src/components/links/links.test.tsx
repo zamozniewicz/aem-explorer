@@ -58,7 +58,7 @@ describe("Links component", () => {
     ).toBeInTheDocument();
   });
 
-  it("skips group headings in compact theme", () => {
+  it("does not render group headings in compact theme", () => {
     render(
       <ThemeContext.Provider
         // eslint-disable-next-line react/jsx-no-constructed-context-values
