@@ -2,9 +2,9 @@ import { Button, ButtonGroup, Tooltip } from "@mui/material";
 import { FC } from "react";
 import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 import { useThemeContext } from "../../contexts/theme-context";
+import { useAemPage } from "../../hooks/use-aem-page";
 import { getCurrentTab } from "../../utils/get-current-tab";
 import { isTab } from "../../utils/is-tab";
-import { openAemPage } from "../../utils/open-aem-page";
 import { Section } from "../section/section";
 
 type PageMode = "edit" | "crxde" | "properties";
@@ -53,19 +53,19 @@ const getPathname = (pageMode: PageMode, path: string): string => {
   return `${editPrefix}${path}.html`;
 };
 
-const openInPageMode = async (pageMode: PageMode, openInNewTab: boolean) => {
-  const path = await getPath();
-  if (path === null) {
-    return;
-  }
-
-  const pathname = getPathname(pageMode, path);
-  openAemPage(pathname, openInNewTab);
-};
-
 export const CurrentPageMode: FC = () => {
   const { theme } = useThemeContext();
-  const { openInNewTab } = useOpenInNewTabContext();
+  const { openAemPage } = useAemPage();
+
+  const openInPageMode = async (pageMode: PageMode) => {
+    const path = await getPath();
+    if (path === null) {
+      return;
+    }
+
+    const pathname = getPathname(pageMode, path);
+    openAemPage(pathname);
+  };
 
   return (
     <Section>
@@ -75,17 +75,13 @@ export const CurrentPageMode: FC = () => {
         size={theme.size === "compact" ? "small" : "medium"}
       >
         <Tooltip title="Open current page in Edit mode">
-          <Button onClick={() => openInPageMode("edit", openInNewTab)}>
-            Edit
-          </Button>
+          <Button onClick={() => openInPageMode("edit")}>Edit</Button>
         </Tooltip>
         <Tooltip title="Open current page in CRXDE">
-          <Button onClick={() => openInPageMode("crxde", openInNewTab)}>
-            CRXDE
-          </Button>
+          <Button onClick={() => openInPageMode("crxde")}>CRXDE</Button>
         </Tooltip>
         <Tooltip title="Open page properties for the current page">
-          <Button onClick={() => openInPageMode("properties", openInNewTab)}>
+          <Button onClick={() => openInPageMode("properties")}>
             Properties
           </Button>
         </Tooltip>
