@@ -1,6 +1,5 @@
 import { Button, ButtonGroup, Tooltip } from "@mui/material";
 import { FC } from "react";
-import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 import { useThemeContext } from "../../contexts/theme-context";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { getCurrentTab } from "../../utils/get-current-tab";
