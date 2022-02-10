@@ -14,6 +14,7 @@ exclude_patterns:
   - "**/*.test.ts"
   - "**/*.test.tsx"
   - "Tests/"
+  - "**/*.stories.tsx"
   - "**/vendor/"
   - "**/*_test.go"
   - "**/*.d.ts"

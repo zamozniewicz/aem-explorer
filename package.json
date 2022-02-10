@@ -79,7 +79,8 @@
       "!src/reportWebVitals.ts",
       "!src/model/*.ts",
       "!src/scripts/*.ts",
-      "!src/index.tsx"
+      "!src/index.tsx",
+      "!src/**/*.stories.tsx"
     ]
   },
   "eslintConfig": {
