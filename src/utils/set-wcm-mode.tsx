@@ -16,6 +16,16 @@ const getDisabledWcmUrl = (tab: Tab): string => {
   return url.toString();
 };
 
+const previewCookies = [
+  { name: "wcmmode", value: "preview" },
+  { name: "cq-editor-layer.page", value: "Preview" },
+  { name: "cq-editor-sidepanel", value: "closed" },
+];
+const touchCookies = [
+  { name: "wcmmode", value: "edit" },
+  { name: "cq-editor-layer.page", value: "Edit" },
+];
+
 const getCookieUrl = (tab: Tab): string => {
   const { protocol, hostname } = new URL(tab.url);
 
@@ -40,37 +50,15 @@ const setCookies = async (
   return Promise.all(pending);
 };
 
-export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
-  const tab = await getCurrentTab();
+const setWcmModeDisabled = (tab: Tab, openInNewTab: boolean) => {
+  openUrl({
+    tabId: tab.id,
+    url: getDisabledWcmUrl(tab),
+    openInNewTab,
+  });
+};
 
-  if (!isTab(tab)) {
-    return;
-  }
-
-  if (mode === "disabled") {
-    openUrl({
-      tabId: tab.id,
-      url: getDisabledWcmUrl(tab),
-      openInNewTab,
-    });
-    return;
-  }
-
-  if (mode === "preview") {
-    await setCookies(tab, [
-      { name: "wcmmode", value: "preview" },
-      { name: "cq-editor-layer.page", value: "Preview" },
-      { name: "cq-editor-sidepanel", value: "closed" },
-    ]);
-  }
-
-  if (mode === "touch") {
-    await setCookies(tab, [
-      { name: "wcmmode", value: "edit" },
-      { name: "cq-editor-layer.page", value: "Edit" },
-    ]);
-  }
-
+const getModeUrl = (tab: Tab, mode: WcmMode): string => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
   if (mode === "touch" || mode === null) {
@@ -84,9 +72,32 @@ export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
     url.pathname = `${editorPath}${url.pathname}`;
   }
 
+  return url.toString();
+};
+
+export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
+  const tab = await getCurrentTab();
+
+  if (!isTab(tab)) {
+    return;
+  }
+
+  if (mode === "disabled") {
+    setWcmModeDisabled(tab, openInNewTab);
+    return;
+  }
+
+  if (mode === "preview") {
+    await setCookies(tab, previewCookies);
+  }
+
+  if (mode === "touch") {
+    await setCookies(tab, touchCookies);
+  }
+
   openUrl({
     tabId: tab.id,
-    url: url.toString(),
+    url: getModeUrl(tab, mode),
     openInNewTab,
   });
 };
