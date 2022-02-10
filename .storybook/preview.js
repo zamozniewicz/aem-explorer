@@ -38,3 +38,16 @@ export const decorators = [
     </ThemeProvider>
   ),
 ];
+
+export const globalTypes = {
+  theme: {
+    name: "Theme color",
+    description: "Global theme color",
+    defaultValue: "dark",
+    toolbar: {
+      icon: "paintbrush",
+      items: ["light", "dark"],
+      showName: true,
+    },
+  },
+};
