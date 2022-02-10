@@ -8,9 +8,14 @@ Chrome extension allowing to quickly navigate between pages and consoles.
 
 ![AEM Explorer](/aem-explorer.png)
 
-Stack: React + Typescript + MaterialUI
+## Tech stack
+
+React + Typescript + MaterialUI
+
 Test: Jest + React Testing Library + codeclimate
+
 Storybook
+
 CI: Github Actions
 
 Automatically deployed Storybook: [zamozniewicz.github.io/aem-explorer/](https://zamozniewicz.github.io/aem-explorer/)
