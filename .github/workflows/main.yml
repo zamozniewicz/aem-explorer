@@ -5,10 +5,6 @@ on:
       - main
     tags:
       - '!*'
-    paths:
-      - src/*
-      - test/*
-      - '*.json'
 
   pull_request:
     paths:
