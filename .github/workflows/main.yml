@@ -1,4 +1,4 @@
-name: build
+name: Test & Coverage
 on:
   push:
     branches:
@@ -38,6 +38,6 @@ jobs:
     - run: npm run build
     - uses: paambaati/codeclimate-action@v3.0.0
       env:
-        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
         coverageCommand: npm run coverage
