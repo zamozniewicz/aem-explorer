@@ -81,6 +81,7 @@ export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
   if (!isTab(tab)) {
     return;
   }
+
   if (mode === "disabled") {
     setWcmModeDisabled(tab, openInNewTab);
     return;
