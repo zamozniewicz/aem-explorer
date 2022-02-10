@@ -4,20 +4,20 @@ import { getCurrentTab } from "./get-current-tab";
 
 jest.mock("./get-current-tab");
 
+type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+
 describe("detectWcmMode helper", () => {
   it("returns null if url is not defined", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(mockTab({ url: undefined }));
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
+      mockTab({ url: undefined })
+    );
 
     const mode = await detectWcmMode();
     expect(mode).toEqual(null);
   });
 
   it("returns mode from search param", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
       mockTab({
         url: "http://localhost:4502/content/en.html?wcmmode=design",
       })
@@ -28,9 +28,7 @@ describe("detectWcmMode helper", () => {
   });
 
   it("returns null for invalid search param value", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
       mockTab({
         url: "http://localhost:4502/content/en.html?wcmmode=xyz",
       })

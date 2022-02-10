@@ -9,17 +9,15 @@ jest.mock("./open-url", () => ({
   openUrl: jest.fn(),
 }));
 
+type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+
 describe("debugClientLibs helper", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("adds search param", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValueOnce(
-      mockTab({ url: "http://localhost:4502/content/en.html" })
-    );
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(mockTab());
 
     debugClientLibs(true, true);
 
@@ -33,9 +31,7 @@ describe("debugClientLibs helper", () => {
   });
 
   it("removes search param", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValueOnce(
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
       mockTab({
         url: "http://localhost:4502/content/en.html?foo=bar&debugClientLibs=true",
       })
@@ -49,6 +45,20 @@ describe("debugClientLibs helper", () => {
         tabId: 0,
         openInNewTab: true,
       });
+    });
+  });
+
+  it("handles incorrect tabs", async () => {
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockTab({
+        url: undefined,
+      })
+    );
+
+    debugClientLibs(false, true);
+
+    await waitFor(() => {
+      expect(openUrl).not.toHaveBeenCalledWith();
     });
   });
 });

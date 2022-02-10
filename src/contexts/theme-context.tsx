@@ -31,12 +31,12 @@ export const ThemeContext = React.createContext<{
   toggleThemeColor: () => {},
 });
 
-type ThemeAction =
+export type ThemeAction =
   | { type: "reset"; payload: Theme }
   | { type: "size"; payload: Theme["size"] }
   | { type: "color"; payload: Theme["color"] };
 
-const themeReducer = (state: Theme, action: ThemeAction): Theme => {
+export const themeReducer = (state: Theme, action: ThemeAction): Theme => {
   switch (action.type) {
     case "reset": {
       return action.payload;

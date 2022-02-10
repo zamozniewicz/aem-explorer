@@ -4,13 +4,13 @@ import { isDebuggingClientLibs } from "./is-debugging-client-libs";
 
 jest.mock("./get-current-tab");
 
+type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+
 describe("isDebuggingClientLibs helper", () => {
   it("returns false for undefined url", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
       mockTab({
-        url: "http://localhost:4502/content/en.html",
+        url: undefined,
       })
     );
 
@@ -19,9 +19,7 @@ describe("isDebuggingClientLibs helper", () => {
   });
 
   it("returns true if search param set", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
       mockTab({
         url: "http://localhost:4502/content/en.html?debugClientLibs=true",
       })
@@ -32,9 +30,7 @@ describe("isDebuggingClientLibs helper", () => {
   });
 
   it("returns false if search param is false", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
       mockTab({
         url: "http://localhost:4502/content/en.html?debugClientLibs=false",
       })
@@ -45,13 +41,7 @@ describe("isDebuggingClientLibs helper", () => {
   });
 
   it("returns false if search param is not set", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(
-      mockTab({
-        url: "http://localhost:4502/content/en.html",
-      })
-    );
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(mockTab());
 
     const isDebugging = await isDebuggingClientLibs();
     expect(isDebugging).toEqual(false);

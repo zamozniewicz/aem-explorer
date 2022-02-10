@@ -16,6 +16,8 @@ jest.mock("../contexts/open-in-new-tab-context", () => ({
   useOpenInNewTabContext: () => ({ openInNewTab: false }),
 }));
 
+type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+
 describe("useAemPage hook", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -23,11 +25,7 @@ describe("useAemPage hook", () => {
 
   it("allows you to change pathname", async () => {
     (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(true);
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValueOnce(
-      mockTab({ url: "http://localhost:4502/content/en.html" })
-    );
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(mockTab());
 
     const { result } = renderHook(() => useAemPage());
 
@@ -40,11 +38,7 @@ describe("useAemPage hook", () => {
   });
 
   it("ignores change when tab is not set", async () => {
-    (
-      getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValueOnce(
-      mockTab({ url: "http://localhost:4502/content/en.html" })
-    );
+    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(mockTab());
     (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(false);
 
     const { result } = renderHook(() => useAemPage());

@@ -50,7 +50,7 @@ const setCookies = async (
   return Promise.all(pending);
 };
 
-const setWcmModeDisabled = (tab: Tab, openInNewTab: boolean) => {
+const setWcmModeDisabled = (tab: Tab, openInNewTab = false) => {
   openUrl({
     tabId: tab.id,
     url: getDisabledWcmUrl(tab),
@@ -81,7 +81,6 @@ export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
   if (!isTab(tab)) {
     return;
   }
-
   if (mode === "disabled") {
     setWcmModeDisabled(tab, openInNewTab);
     return;
