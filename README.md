@@ -12,12 +12,16 @@ Chrome extension allowing to quickly navigate between pages and consoles.
 
 React + Typescript + MaterialUI
 
-Test: Jest + React Testing Library + codeclimate
-
-Storybook
-
 CI: Github Actions
 
-Automatically deployed Storybook: [zamozniewicz.github.io/aem-explorer/](https://zamozniewicz.github.io/aem-explorer/)
+Test: Jest + React Testing Library + codeclimate + Storybook
+
+Storybook from `main` branch is automatically deployed to Github Pages: [zamozniewicz.github.io/aem-explorer/](https://zamozniewicz.github.io/aem-explorer/)
+
+## Chrome extension
+
+[AEM Explorer in chrome web store](https://chrome.google.com/webstore/detail/aem-explorer/ccmaglfddhhajghfpiifkjkikabckohn)
+
+## Attributions
 
 Icons made by [Freepik](https://www.freepik.com "Freepik") from [www.flaticon.com](https://www.flaticon.com/ "Flaticon").
