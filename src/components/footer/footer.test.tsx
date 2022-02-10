@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import { fireEvent, screen } from "@testing-library/dom";
+import { screen } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { OpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 import { ThemeContext } from "../../contexts/theme-context";
 import { Footer } from "./footer";
@@ -57,7 +58,7 @@ describe("Footer component", () => {
 
       const newTabSwitch = screen.getByRole("checkbox");
 
-      fireEvent.click(newTabSwitch);
+      userEvent.click(newTabSwitch);
       expect(mockToggleOpenInNewTab).toBeCalled();
     });
   });
@@ -124,7 +125,7 @@ describe("Footer component", () => {
       const button = screen.getByRole("button", {
         name: "Switch to light theme",
       });
-      fireEvent.click(button);
+      userEvent.click(button);
 
       expect(mockToggleThemeColor).toHaveBeenCalled();
     });
@@ -192,7 +193,7 @@ describe("Footer component", () => {
       const button = screen.getByRole("button", {
         name: "Switch to compact theme",
       });
-      fireEvent.click(button);
+      userEvent.click(button);
 
       expect(mockToggleThemeSize).toHaveBeenCalled();
     });

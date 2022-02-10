@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import { fireEvent, screen } from "@testing-library/dom";
+import { screen } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { useDebug } from "../../hooks/use-debug";
 import { ClientLibs } from "./client-libs";
@@ -39,7 +40,7 @@ describe("ClientLibs component", () => {
     render(<ClientLibs />);
 
     const button = screen.getByRole("button");
-    fireEvent.click(button);
+    userEvent.click(button);
 
     expect(mockOpenAemPage).toHaveBeenCalledWith(
       "/libs/granite/ui/content/dumplibs.rebuild.html"
@@ -50,7 +51,7 @@ describe("ClientLibs component", () => {
     render(<ClientLibs />);
 
     const checkbox = screen.getByRole("checkbox");
-    fireEvent.click(checkbox);
+    userEvent.click(checkbox);
 
     expect(mockHandleDebugChange).toHaveBeenCalledWith(true);
   });

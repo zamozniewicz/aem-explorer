@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import { fireEvent, screen, waitFor } from "@testing-library/dom";
+import { screen, waitFor } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { mockTab } from "../../model/mock-tab";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { getCurrentTab } from "../../utils/get-current-tab";
@@ -49,7 +50,7 @@ describe("CurrentPageMode component", () => {
       const editButton = screen.getByRole("button", {
         name: "Open current page in Edit mode",
       });
-      fireEvent.click(editButton);
+      userEvent.click(editButton);
 
       await waitFor(() => {
         expect(mockOpenAemPage).toHaveBeenCalledWith(
@@ -72,7 +73,7 @@ describe("CurrentPageMode component", () => {
       const editButton = screen.getByRole("button", {
         name: "Open current page in Edit mode",
       });
-      fireEvent.click(editButton);
+      userEvent.click(editButton);
 
       await waitFor(() => {
         expect(mockOpenAemPage).toHaveBeenCalledWith(
@@ -95,7 +96,7 @@ describe("CurrentPageMode component", () => {
       const propertiesButton = screen.getByRole("button", {
         name: "Open page properties for the current page",
       });
-      fireEvent.click(propertiesButton);
+      userEvent.click(propertiesButton);
 
       await waitFor(() => {
         expect(mockOpenAemPage).toHaveBeenCalledWith(
@@ -118,7 +119,7 @@ describe("CurrentPageMode component", () => {
       const propertiesButton = screen.getByRole("button", {
         name: "Open page properties for the current page",
       });
-      fireEvent.click(propertiesButton);
+      userEvent.click(propertiesButton);
 
       await waitFor(() => {
         expect(mockOpenAemPage).toHaveBeenCalledWith(
@@ -141,7 +142,7 @@ describe("CurrentPageMode component", () => {
       const crxdeButton = screen.getByRole("button", {
         name: "Open current page in CRXDE",
       });
-      fireEvent.click(crxdeButton);
+      userEvent.click(crxdeButton);
 
       await waitFor(() => {
         expect(mockOpenAemPage).toHaveBeenCalledWith(
@@ -164,7 +165,7 @@ describe("CurrentPageMode component", () => {
       const crxdeButton = screen.getByRole("button", {
         name: "Open current page in CRXDE",
       });
-      fireEvent.click(crxdeButton);
+      userEvent.click(crxdeButton);
 
       await waitFor(() => {
         expect(mockOpenAemPage).toHaveBeenCalledWith(

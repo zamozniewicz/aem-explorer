@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import { fireEvent, screen } from "@testing-library/dom";
+import { screen } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { AemLink } from "./aem-link";
 
@@ -36,7 +37,7 @@ describe("AemLink component", () => {
     render(<AemLink pathname={pathname} text="I'm a button" />);
 
     const button = screen.getByRole("button");
-    fireEvent.click(button);
+    userEvent.click(button);
 
     expect(mockOpenAemPage).toHaveBeenCalledWith(pathname);
   });
