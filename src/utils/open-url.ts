@@ -5,7 +5,7 @@ export const openUrl = ({
 }: {
   tabId: number;
   url: string;
-  openInNewTab: boolean;
+  openInNewTab?: boolean;
 }) => {
   const properties = { url };
   if (openInNewTab) {

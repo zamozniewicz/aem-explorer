@@ -18,4 +18,12 @@ describe("openUrl helper", () => {
       url: "http://example.com",
     });
   });
+
+  it("update current tab if argument not defined", () => {
+    openUrl({ tabId: 0, url: "http://example.com" });
+
+    expect(chrome.tabs.update).toHaveBeenCalledWith(0, {
+      url: "http://example.com",
+    });
+  });
 });
