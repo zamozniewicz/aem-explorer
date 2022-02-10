@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
+import { mockTab } from "../model/mock-tab";
 import { getCurrentTab } from "../utils/get-current-tab";
 import { isTab } from "../utils/is-tab";
 import { openUrl } from "../utils/open-url";
@@ -15,21 +16,6 @@ jest.mock("../contexts/open-in-new-tab-context", () => ({
   useOpenInNewTabContext: () => ({ openInNewTab: false }),
 }));
 
-const mockTab: chrome.tabs.Tab = {
-  id: 0,
-  groupId: 0,
-  windowId: 0,
-  index: 0,
-  url: "http://localhost:4502/content/en.html",
-  pinned: false,
-  highlighted: false,
-  active: false,
-  incognito: false,
-  selected: false,
-  discarded: false,
-  autoDiscardable: false,
-};
-
 describe("useAemPage hook", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -39,7 +25,9 @@ describe("useAemPage hook", () => {
     (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(true);
     (
       getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValueOnce(mockTab);
+    ).mockResolvedValueOnce(
+      mockTab({ url: "http://localhost:4502/content/en.html" })
+    );
 
     const { result } = renderHook(() => useAemPage());
 
@@ -54,7 +42,9 @@ describe("useAemPage hook", () => {
   it("ignores change when tab is not set", async () => {
     (
       getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValueOnce(mockTab);
+    ).mockResolvedValueOnce(
+      mockTab({ url: "http://localhost:4502/content/en.html" })
+    );
     (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(false);
 
     const { result } = renderHook(() => useAemPage());

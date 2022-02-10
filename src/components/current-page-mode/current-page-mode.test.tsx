@@ -1,26 +1,12 @@
 import { render } from "@testing-library/react";
 import { fireEvent, screen, waitFor } from "@testing-library/dom";
+import { mockTab } from "../../model/mock-tab";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { getCurrentTab } from "../../utils/get-current-tab";
 import { CurrentPageMode } from "./current-page-mode";
 
 jest.mock("../../hooks/use-aem-page");
 jest.mock("../../utils/get-current-tab");
-
-const mockTab: chrome.tabs.Tab = {
-  id: 0,
-  groupId: 0,
-  windowId: 0,
-  index: 0,
-  url: "http://localhost:4502/content/en.html",
-  pinned: false,
-  highlighted: false,
-  active: false,
-  incognito: false,
-  selected: false,
-  discarded: false,
-  autoDiscardable: false,
-};
 
 describe("CurrentPageMode component", () => {
   const mockOpenAemPage = jest.fn();
@@ -36,7 +22,9 @@ describe("CurrentPageMode component", () => {
 
     (
       getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-    ).mockResolvedValue(mockTab);
+    ).mockResolvedValue(
+      mockTab({ url: "http://localhost:4502/content/en.html" })
+    );
   });
 
   it("renders buttons", () => {
@@ -50,10 +38,11 @@ describe("CurrentPageMode component", () => {
     it("switches from CRXDE to Edit", async () => {
       (
         getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-      ).mockResolvedValueOnce({
-        ...mockTab,
-        url: "http://localhost:4502/crx/de/index.jsp#/content/en",
-      });
+      ).mockResolvedValueOnce(
+        mockTab({
+          url: "http://localhost:4502/crx/de/index.jsp#/content/en",
+        })
+      );
 
       render(<CurrentPageMode />);
 
@@ -72,10 +61,11 @@ describe("CurrentPageMode component", () => {
     it("switches from Properties to Edit", async () => {
       (
         getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-      ).mockResolvedValueOnce({
-        ...mockTab,
-        url: "http://localhost:4502/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/en",
-      });
+      ).mockResolvedValueOnce(
+        mockTab({
+          url: "http://localhost:4502/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/en",
+        })
+      );
 
       render(<CurrentPageMode />);
 
@@ -94,10 +84,11 @@ describe("CurrentPageMode component", () => {
     it("switches from CRXDE to Properties", async () => {
       (
         getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-      ).mockResolvedValueOnce({
-        ...mockTab,
-        url: "http://localhost:4502/crx/de/index.jsp#/content/en",
-      });
+      ).mockResolvedValueOnce(
+        mockTab({
+          url: "http://localhost:4502/crx/de/index.jsp#/content/en",
+        })
+      );
 
       render(<CurrentPageMode />);
 
@@ -116,10 +107,11 @@ describe("CurrentPageMode component", () => {
     it("switches from Edit to Properties", async () => {
       (
         getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-      ).mockResolvedValueOnce({
-        ...mockTab,
-        url: "http://localhost:4502/editor.html/content/en.html",
-      });
+      ).mockResolvedValueOnce(
+        mockTab({
+          url: "http://localhost:4502/editor.html/content/en.html",
+        })
+      );
 
       render(<CurrentPageMode />);
 
@@ -138,10 +130,11 @@ describe("CurrentPageMode component", () => {
     it("switches from Edit to CRXDE", async () => {
       (
         getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-      ).mockResolvedValueOnce({
-        ...mockTab,
-        url: "http://localhost:4502/editor.html/content/en.html",
-      });
+      ).mockResolvedValueOnce(
+        mockTab({
+          url: "http://localhost:4502/editor.html/content/en.html",
+        })
+      );
 
       render(<CurrentPageMode />);
 
@@ -160,10 +153,11 @@ describe("CurrentPageMode component", () => {
     it("switches from Properties to CRXDE", async () => {
       (
         getCurrentTab as jest.MockedFunction<typeof getCurrentTab>
-      ).mockResolvedValueOnce({
-        ...mockTab,
-        url: "http://localhost:4502/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/en",
-      });
+      ).mockResolvedValueOnce(
+        mockTab({
+          url: "http://localhost:4502/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/en",
+        })
+      );
 
       render(<CurrentPageMode />);
 
