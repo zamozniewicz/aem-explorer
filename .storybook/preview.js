@@ -15,30 +15,6 @@ export const parameters = {
   },
 }
 
-const light = {
-  palette: { mode: "light" },
-};
-
-const dark = {
-  palette: { mode: "dark" },
-};
-
-export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={createTheme(dark)}>
-      <Box sx={{
-          minWidth: "calc(100vw - 2em)",
-          minHeight: "calc(100vh - 2em)",
-          bgcolor: "background.paper",
-          p: "1em"
-        }}
-      >
-        <Story />
-      </Box>
-    </ThemeProvider>
-  ),
-];
-
 export const globalTypes = {
   theme: {
     name: "Theme color",
@@ -51,3 +27,34 @@ export const globalTypes = {
     },
   },
 };
+
+const themes = {
+  light: {
+    palette: { mode: "light" },
+  },
+  dark: {
+    palette: { mode: "dark" },
+  }
+};
+
+const withThemeProvider = (Story, context) => {
+  const theme = themes[context.globals.theme];
+
+  return (
+    <ThemeProvider theme={createTheme(theme)}>
+      <Box sx={{
+          minWidth: "calc(100vw - 2em)",
+          minHeight: "calc(100vh - 2em)",
+          bgcolor: "background.paper",
+          p: "1em"
+        }}
+      >
+        <Story {...context} />
+      </Box>
+    </ThemeProvider>
+  )
+};
+
+export const decorators = [
+  withThemeProvider
+];

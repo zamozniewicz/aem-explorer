@@ -5,9 +5,9 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-controls",
     "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app"
+    "@storybook/addon-controls",
+    "@storybook/preset-create-react-app",
   ],
   "framework": "@storybook/react",
   "core": {
