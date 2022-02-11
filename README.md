@@ -10,11 +10,9 @@ Chrome extension allowing to quickly navigate between pages and consoles.
 
 ## Tech stack
 
-React + Typescript + MaterialUI
-
-CI: Github Actions
-
-Test: Jest + React Testing Library + codeclimate + Storybook
+- React + Typescript + MaterialUI
+- CI: Github Actions
+- Test: Jest + React Testing Library + codeclimate + Storybook
 
 Storybook from `main` branch is automatically deployed to Github Pages: [zamozniewicz.github.io/aem-explorer/](https://zamozniewicz.github.io/aem-explorer/)
 
