@@ -21,7 +21,7 @@ export const Links: FC<LinksProps> = ({ linksGroups }) => {
   return (
     <Section>
       {linksGroups.map(({ title, id, links }) => (
-        <Box key={id} sx={{ mb: 2 }}>
+        <Box key={id} sx={{ mb: 2, "&:last-child": { mb: 0 } }}>
           {theme.size === "comfortable" && (
             <Typography variant="body1" component="h3" sx={{ mb: 1 }}>
               {title}
