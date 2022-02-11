@@ -1,4 +1,4 @@
-module.exports = {
+{
   "env": {
     "browser": true,
     "es2021": true
@@ -34,16 +34,17 @@ module.exports = {
   },
   "overrides": [
     {
-      "files": ["*.test.ts", "*.test.tsx"],
+      "files": ["*.test.*"],
       "rules": {
         "react/jsx-no-constructed-context-values": "off"
       }
     },
     {
-      "files": ["*.stories.tsx"],
+      "files": ["*.stories.*"],
       "rules": {
+        "import/no-anonymous-default-export": "off",
         "react/jsx-props-no-spreading": "off"
       }
     }
   ]
-};
+}

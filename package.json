@@ -82,17 +82,5 @@
       "!src/index.tsx",
       "!src/**/*.stories.tsx"
     ]
-  },
-  "eslintConfig": {
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
   }
 }

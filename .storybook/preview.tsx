@@ -39,12 +39,11 @@ export const globalTypes = {
   }
 };
 
-const muiThemes = {
-  light: { palette: { mode: "light", } },
-  dark: { palette: { mode: "dark" } },
-};
-
 const withMuiThemeProvider = (Story, context) => {
+  const muiThemes = {
+    light: { palette: { mode: "light", } },
+    dark: { palette: { mode: "dark" } },
+  };
   const themeColor = muiThemes[context.globals.themeColor];
 
   return (

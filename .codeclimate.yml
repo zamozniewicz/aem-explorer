@@ -5,6 +5,7 @@ exclude_patterns:
   - "dist/"
   - "build/"
   - "features/"
+  - "docs/"
   - "**/node_modules/"
   - "script/"
   - "src/model/"
