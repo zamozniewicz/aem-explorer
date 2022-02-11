@@ -15,7 +15,6 @@ describe("Section component", () => {
     it("renders heading in comfortable theme", () => {
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "comfortable", color: "light" },
             toggleThemeSize: () => {},
@@ -32,7 +31,6 @@ describe("Section component", () => {
     it("does not render heading in compact theme", () => {
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "compact", color: "light" },
             toggleThemeSize: () => {},

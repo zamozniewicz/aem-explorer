@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-
 import { AemLink as AemLinkComponent, AemLinkProps } from "./aem-link";
 
 export default {
@@ -10,7 +9,6 @@ export default {
 
 const Template: ComponentStory<typeof AemLinkComponent> = (
   args: AemLinkProps
-  // eslint-disable-next-line react/jsx-props-no-spreading
 ) => <AemLinkComponent {...args} />;
 
 export const AemLink = Template.bind({});

@@ -31,5 +31,20 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
     "@typescript-eslint/no-unused-vars": "warn"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.test.ts", "*.test.tsx"],
+      "rules": {
+        "react/jsx-no-constructed-context-values": "off"
+      }
+    },
+
+    {
+      "files": ["*.stories.tsx"],
+      "rules": {
+        "react/jsx-props-no-spreading": "off"
+      }
+    }
+  ]
 };

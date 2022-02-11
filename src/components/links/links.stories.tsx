@@ -9,7 +9,6 @@ export default {
 } as ComponentMeta<typeof LinksComponent>;
 
 const Template: ComponentStory<typeof LinksComponent> = (args: LinksProps) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
   <LinksComponent {...args} />
 );
 

@@ -10,7 +10,6 @@ describe("Footer component", () => {
     it("renders checked new tab switch", () => {
       render(
         <OpenInNewTabContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             openInNewTab: false,
             toggleOpenInNewTab: () => {},
@@ -27,7 +26,6 @@ describe("Footer component", () => {
     it("renders unchecked new tab switch", () => {
       render(
         <OpenInNewTabContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             openInNewTab: true,
             toggleOpenInNewTab: () => {},
@@ -46,7 +44,6 @@ describe("Footer component", () => {
 
       render(
         <OpenInNewTabContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             openInNewTab: false,
             toggleOpenInNewTab: mockToggleOpenInNewTab,
@@ -67,7 +64,6 @@ describe("Footer component", () => {
     it("renders color switch in light theme", () => {
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "comfortable", color: "light" },
             toggleThemeSize: () => {},
@@ -88,7 +84,6 @@ describe("Footer component", () => {
     it("renders color switch in dark theme", () => {
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "comfortable", color: "dark" },
             toggleThemeSize: () => {},
@@ -111,7 +106,6 @@ describe("Footer component", () => {
 
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "comfortable", color: "dark" },
             toggleThemeSize: () => {},
@@ -135,7 +129,6 @@ describe("Footer component", () => {
     it("renders size switch in comfortable theme", () => {
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "comfortable", color: "dark" },
             toggleThemeSize: () => {},
@@ -156,7 +149,6 @@ describe("Footer component", () => {
     it("renders size switch in compact theme", () => {
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "compact", color: "dark" },
             toggleThemeSize: () => {},
@@ -179,7 +171,6 @@ describe("Footer component", () => {
 
       render(
         <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
           value={{
             theme: { size: "comfortable", color: "dark" },
             toggleThemeSize: mockToggleThemeSize,
