@@ -2,18 +2,24 @@ import { waitFor } from "@testing-library/react";
 import { mockTab } from "../model/mock-tab";
 import { debugClientLibs } from "./debug-client-libs";
 import { getCurrentTab } from "./get-current-tab";
+import { isTab } from "./is-tab";
 import { openUrl } from "./open-url";
 
 jest.mock("./get-current-tab");
 jest.mock("./open-url", () => ({
   openUrl: jest.fn(),
 }));
+jest.mock("./is-tab");
 
 type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
 
 describe("debugClientLibs helper", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  beforeEach(() => {
+    (isTab as jest.MockedFunction<typeof isTab>).mockReturnValue(true);
   });
 
   it("adds search param", async () => {
@@ -54,11 +60,14 @@ describe("debugClientLibs helper", () => {
         url: undefined,
       })
     );
+    (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(false);
 
     debugClientLibs(false, true);
 
     await waitFor(() => {
-      expect(openUrl).not.toHaveBeenCalledWith();
+      expect(isTab).toHaveBeenCalled();
     });
+
+    expect(openUrl).not.toHaveBeenCalledWith();
   });
 });

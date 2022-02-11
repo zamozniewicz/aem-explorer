@@ -39,7 +39,6 @@ module.exports = {
         "react/jsx-no-constructed-context-values": "off"
       }
     },
-
     {
       "files": ["*.stories.tsx"],
       "rules": {
