@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useThemeContext } from "../../contexts/theme-context";
 import { Section } from "../section/section";
 import { AemLink } from "../aem-link/aem-link";
@@ -21,18 +21,18 @@ export const Links: FC<LinksProps> = ({ linksGroups }) => {
   return (
     <Section>
       {linksGroups.map(({ title, id, links }) => (
-        <div key={id}>
+        <Box key={id} sx={{ mb: 2 }}>
           {theme.size === "comfortable" && (
             <Typography variant="body1" component="h3" sx={{ mb: 1 }}>
               {title}
             </Typography>
           )}
-          <Stack sx={{ mb: 2 }} spacing={2} direction="row">
+          <Stack spacing={2} direction="row">
             {links.map(({ pathname, label }) => (
               <AemLink key={pathname} pathname={pathname} text={label} />
             ))}
           </Stack>
-        </div>
+        </Box>
       ))}
     </Section>
   );

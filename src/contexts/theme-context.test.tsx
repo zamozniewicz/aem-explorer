@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {
@@ -10,7 +10,7 @@ import {
 
 Object.assign(global, require("jest-chrome"));
 
-const MockComponent: React.FC = () => {
+const MockComponent: FC = () => {
   const { theme, toggleThemeSize, toggleThemeColor } = useContext(ThemeContext);
   return (
     <>
