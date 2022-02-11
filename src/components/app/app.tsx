@@ -3,6 +3,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { linksGroups } from "../../model/links";
 import {
   ThemeContextProvider,
   useThemeContext,
@@ -43,7 +44,7 @@ export const App: React.FC = () => {
               <Mode />
               <ClientLibs />
               <CurrentPageMode />
-              <Links />
+              <Links linksGroups={linksGroups} />
             </Box>
             <Footer />
           </Container>

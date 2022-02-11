@@ -3,37 +3,24 @@ import { screen } from "@testing-library/dom";
 import { ThemeContext } from "../../contexts/theme-context";
 import { Links } from "./links";
 
-jest.mock("../../model/links", () => ({
-  linksGroups: [
-    {
-      title: "Group 1",
-      id: "group1",
-      links: [
-        {
-          pathname: "/link11",
-          label: "Link 1 1",
-        },
-      ],
-    },
-    {
-      id: "group2",
-      links: [
-        {
-          pathname: "/link21",
-          label: "Link 2/1",
-        },
-        {
-          pathname: "/link22",
-          label: "Link 2/2",
-        },
-      ],
-    },
-  ],
-}));
+const linksGroups = [
+  {
+    title: "Group 1",
+    id: "group1",
+    links: [{ pathname: "/link11", label: "Link 1 1" }],
+  },
+  {
+    id: "group2",
+    links: [
+      { pathname: "/link21", label: "Link 2/1" },
+      { pathname: "/link22", label: "Link 2/2" },
+    ],
+  },
+];
 
 describe("Links component", () => {
   it("renders buttons", () => {
-    render(<Links />);
+    render(<Links linksGroups={linksGroups} />);
 
     const links = screen.getAllByRole("button");
     expect(links).toHaveLength(3);
@@ -49,7 +36,7 @@ describe("Links component", () => {
           toggleThemeColor: () => {},
         }}
       >
-        <Links />
+        <Links linksGroups={linksGroups} />
       </ThemeContext.Provider>
     );
 
@@ -68,7 +55,7 @@ describe("Links component", () => {
           toggleThemeColor: () => {},
         }}
       >
-        <Links />
+        <Links linksGroups={linksGroups} />
       </ThemeContext.Provider>
     );
 

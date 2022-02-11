@@ -1,15 +1,4 @@
-type AemLink = {
-  pathname: string;
-  label: string;
-};
-
-type LinksGroup = {
-  id: string;
-  title?: string;
-  links: AemLink[];
-};
-
-export const linksGroups: LinksGroup[] = [
+export const linksGroups = [
   {
     title: "Admin",
     id: "Admin",

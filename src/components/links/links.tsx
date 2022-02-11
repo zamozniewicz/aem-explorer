@@ -1,11 +1,21 @@
 import { FC } from "react";
 import { Stack, Typography } from "@mui/material";
 import { useThemeContext } from "../../contexts/theme-context";
-import { linksGroups } from "../../model/links";
 import { Section } from "../section/section";
 import { AemLink } from "../aem-link/aem-link";
 
-export const Links: FC = () => {
+export type LinksProps = {
+  linksGroups: Array<{
+    id: string;
+    title?: string;
+    links: Array<{
+      pathname: string;
+      label: string;
+    }>;
+  }>;
+};
+
+export const Links: FC<LinksProps> = ({ linksGroups }) => {
   const { theme } = useThemeContext();
 
   return (
