@@ -6,60 +6,6 @@ import { ThemeContext } from "../../contexts/theme-context";
 import { Footer } from "./footer";
 
 describe("Footer component", () => {
-  describe("New tab switch", () => {
-    it("renders checked new tab switch", () => {
-      render(
-        <OpenInNewTabContext.Provider
-          value={{
-            openInNewTab: false,
-            toggleOpenInNewTab: () => {},
-          }}
-        >
-          <Footer />
-        </OpenInNewTabContext.Provider>
-      );
-
-      const newTabSwitch = screen.getByRole("checkbox");
-      expect(newTabSwitch).not.toBeChecked();
-    });
-
-    it("renders unchecked new tab switch", () => {
-      render(
-        <OpenInNewTabContext.Provider
-          value={{
-            openInNewTab: true,
-            toggleOpenInNewTab: () => {},
-          }}
-        >
-          <Footer />
-        </OpenInNewTabContext.Provider>
-      );
-
-      const newTabSwitch = screen.getByRole("checkbox");
-      expect(newTabSwitch).toBeChecked();
-    });
-
-    it("toggles tab switch", () => {
-      const mockToggleOpenInNewTab = jest.fn();
-
-      render(
-        <OpenInNewTabContext.Provider
-          value={{
-            openInNewTab: false,
-            toggleOpenInNewTab: mockToggleOpenInNewTab,
-          }}
-        >
-          <Footer />
-        </OpenInNewTabContext.Provider>
-      );
-
-      const newTabSwitch = screen.getByRole("checkbox");
-
-      userEvent.click(newTabSwitch);
-      expect(mockToggleOpenInNewTab).toBeCalled();
-    });
-  });
-
   describe("Theme color", () => {
     it("renders color switch in light theme", () => {
       render(
