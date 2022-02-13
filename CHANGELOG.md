@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.9 (February 14, 2022)
+
+* Adjust layout
+* Solve tech debt
+
 ## 0.0.8 (February 1, 2022)
 
 * Add light mode
