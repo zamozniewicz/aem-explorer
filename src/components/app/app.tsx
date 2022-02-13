@@ -43,9 +43,9 @@ export const App: FC = () => {
             <Header />
             <Box role="main" sx={{ mt: theme.size === "compact" ? 1 : 2 }}>
               <Mode />
-              <ClientLibs />
               <CurrentPageMode />
               <Links linksGroups={linksGroups} />
+              <ClientLibs />
             </Box>
             <Footer />
           </Container>
