@@ -36,4 +36,15 @@ describe("detectWcmMode helper", () => {
     const mode = await detectWcmMode();
     expect(mode).toEqual(null);
   });
+
+  it("assumes touch mode if param not set", async () => {
+    mockedGetCurrentTab.mockResolvedValue(
+      mockTab({
+        url: "http://localhost:4502/editor.html/content/en.html",
+      })
+    );
+
+    const mode = await detectWcmMode();
+    expect(mode).toEqual("touch");
+  });
 });
