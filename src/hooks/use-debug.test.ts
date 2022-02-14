@@ -13,9 +13,12 @@ jest.mock("../contexts/open-in-new-tab-context", () => ({
   useOpenInNewTabContext: () => ({ openInNewTab: false }),
 }));
 
+const mockedIsDebuggingClientLibs =
+  isDebuggingClientLibs as jest.MockedFunction<typeof isDebuggingClientLibs>;
+
 describe("useDebug hook", () => {
   it("allows you to switch debug mode", async () => {
-    (isDebuggingClientLibs as jest.Mock).mockResolvedValueOnce(true);
+    mockedIsDebuggingClientLibs.mockResolvedValueOnce(true);
     const { result, waitForNextUpdate } = renderHook(() => useDebug());
     await waitForNextUpdate();
 

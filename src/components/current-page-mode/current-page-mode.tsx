@@ -6,7 +6,8 @@ import { getCurrentTab } from "../../utils/get-current-tab";
 import { isTab } from "../../utils/is-tab";
 import { Section } from "../section/section";
 
-type PageMode = "edit" | "crxde" | "properties";
+const pageModes = ["edit", "crxde", "properties"] as const;
+type PageMode = typeof pageModes[number];
 
 const pagePropertiesPathname =
   "/mnt/overlay/wcm/core/content/sites/properties.html";

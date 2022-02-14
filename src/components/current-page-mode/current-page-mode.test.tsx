@@ -9,7 +9,10 @@ import { CurrentPageMode } from "./current-page-mode";
 jest.mock("../../hooks/use-aem-page");
 jest.mock("../../utils/get-current-tab");
 
-type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<
+  typeof getCurrentTab
+>;
+const mockedUseAemPage = useAemPage as jest.MockedFunction<typeof useAemPage>;
 
 describe("CurrentPageMode component", () => {
   const mockOpenAemPage = jest.fn();
@@ -19,11 +22,11 @@ describe("CurrentPageMode component", () => {
   });
 
   beforeEach(() => {
-    (useAemPage as jest.MockedFunction<typeof useAemPage>).mockReturnValue({
+    mockedUseAemPage.mockReturnValue({
       openAemPage: mockOpenAemPage,
     });
 
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(mockTab());
+    mockedGetCurrentTab.mockResolvedValue(mockTab());
   });
 
   it("renders buttons", () => {
@@ -35,7 +38,7 @@ describe("CurrentPageMode component", () => {
 
   describe("Changing modes", () => {
     it("terminates for incorrect tabs", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: undefined,
         })
@@ -52,7 +55,7 @@ describe("CurrentPageMode component", () => {
     });
 
     it("switches from CRXDE to Edit", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: "http://localhost:4502/crx/de/index.jsp#/content/en",
         })
@@ -73,7 +76,7 @@ describe("CurrentPageMode component", () => {
     });
 
     it("switches from Properties to Edit", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: "http://localhost:4502/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/en",
         })
@@ -94,7 +97,7 @@ describe("CurrentPageMode component", () => {
     });
 
     it("switches from CRXDE to Properties", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: "http://localhost:4502/crx/de/index.jsp#/content/en",
         })
@@ -115,7 +118,7 @@ describe("CurrentPageMode component", () => {
     });
 
     it("switches from Edit to Properties", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: "http://localhost:4502/editor.html/content/en.html",
         })
@@ -136,7 +139,7 @@ describe("CurrentPageMode component", () => {
     });
 
     it("switches from Edit to CRXDE", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: "http://localhost:4502/editor.html/content/en.html",
         })
@@ -157,7 +160,7 @@ describe("CurrentPageMode component", () => {
     });
 
     it("switches from Properties to CRXDE", async () => {
-      (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+      mockedGetCurrentTab.mockResolvedValueOnce(
         mockTab({
           url: "http://localhost:4502/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/en",
         })

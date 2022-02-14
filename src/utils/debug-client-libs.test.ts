@@ -11,7 +11,10 @@ jest.mock("./open-url", () => ({
 }));
 jest.mock("./is-tab");
 
-type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<
+  typeof getCurrentTab
+>;
+const mockedIsTab = isTab as jest.MockedFunction<typeof isTab>;
 
 describe("debugClientLibs helper", () => {
   beforeEach(() => {
@@ -19,11 +22,11 @@ describe("debugClientLibs helper", () => {
   });
 
   beforeEach(() => {
-    (isTab as jest.MockedFunction<typeof isTab>).mockReturnValue(true);
+    mockedIsTab.mockReturnValue(true);
   });
 
   it("adds search param", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(mockTab());
+    mockedGetCurrentTab.mockResolvedValueOnce(mockTab());
 
     debugClientLibs(true, true);
 
@@ -37,7 +40,7 @@ describe("debugClientLibs helper", () => {
   });
 
   it("removes search param", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+    mockedGetCurrentTab.mockResolvedValueOnce(
       mockTab({
         url: "http://localhost:4502/content/en.html?foo=bar&debugClientLibs=true",
       })
@@ -55,12 +58,12 @@ describe("debugClientLibs helper", () => {
   });
 
   it("handles incorrect tabs", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValueOnce(
+    mockedGetCurrentTab.mockResolvedValueOnce(
       mockTab({
         url: undefined,
       })
     );
-    (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(false);
+    mockedIsTab.mockReturnValueOnce(false);
 
     debugClientLibs(false, true);
 

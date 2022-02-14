@@ -7,6 +7,10 @@ import { useCurrentWcmMode } from "../../hooks/use-current-wcm-mode";
 
 jest.mock("../../hooks/use-current-wcm-mode");
 
+const mockedUseCurrentWcmMode = useCurrentWcmMode as jest.MockedFunction<
+  typeof useCurrentWcmMode
+>;
+
 describe("Mode component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -14,9 +18,7 @@ describe("Mode component", () => {
 
   const mockHandleWcmModeChange = jest.fn();
   beforeEach(() => {
-    (
-      useCurrentWcmMode as jest.MockedFunction<typeof useCurrentWcmMode>
-    ).mockReturnValue({
+    mockedUseCurrentWcmMode.mockReturnValue({
       currentWcmMode: "disabled",
       handleWcmModeChange: mockHandleWcmModeChange,
     });

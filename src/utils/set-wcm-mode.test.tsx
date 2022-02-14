@@ -5,13 +5,16 @@ import { getCurrentTab } from "./get-current-tab";
 import { openUrl } from "./open-url";
 import { isTab } from "./is-tab";
 
+Object.assign(global, require("jest-chrome"));
+
 jest.mock("./open-url");
 jest.mock("./get-current-tab");
 jest.mock("./is-tab");
 
-Object.assign(global, require("jest-chrome"));
-
-type MockedGetCurrentTab = jest.MockedFunction<typeof getCurrentTab>;
+const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<
+  typeof getCurrentTab
+>;
+const mockedIsTab = isTab as jest.MockedFunction<typeof isTab>;
 
 describe("setWcmMode helper", () => {
   beforeEach(() => {
@@ -19,11 +22,11 @@ describe("setWcmMode helper", () => {
   });
 
   beforeEach(() => {
-    (isTab as jest.MockedFunction<typeof isTab>).mockReturnValue(true);
+    mockedIsTab.mockReturnValue(true);
   });
 
   it("sets wcmmode=disabled", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
+    mockedGetCurrentTab.mockResolvedValue(
       mockTab({
         url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
       })
@@ -41,7 +44,7 @@ describe("setWcmMode helper", () => {
   });
 
   it("sets edit wcmmode", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
+    mockedGetCurrentTab.mockResolvedValue(
       mockTab({
         url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
       })
@@ -73,7 +76,7 @@ describe("setWcmMode helper", () => {
   });
 
   it("sets wcmmode=preview", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(mockTab());
+    mockedGetCurrentTab.mockResolvedValue(mockTab());
 
     setWcmMode("preview", false);
 
@@ -108,7 +111,7 @@ describe("setWcmMode helper", () => {
   });
 
   it("sets wcmmode=design", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(mockTab());
+    mockedGetCurrentTab.mockResolvedValue(mockTab());
 
     setWcmMode("design", false);
 
@@ -122,10 +125,8 @@ describe("setWcmMode helper", () => {
   });
 
   it("skips setting mode for incorrect tabs", async () => {
-    (getCurrentTab as MockedGetCurrentTab).mockResolvedValue(
-      mockTab({ url: undefined })
-    );
-    (isTab as jest.MockedFunction<typeof isTab>).mockReturnValueOnce(false);
+    mockedGetCurrentTab.mockResolvedValue(mockTab({ url: undefined }));
+    mockedIsTab.mockReturnValueOnce(false);
 
     setWcmMode("disabled", false);
 

@@ -8,6 +8,9 @@ import {
 
 Object.assign(global, require("jest-chrome"));
 
+const mockedChromeStorageSyncGet = chrome.storage.sync
+  .get as jest.MockedFunction<typeof chrome.storage.sync.get>;
+
 const MockComponent: FC = () => {
   const { openInNewTab, toggleOpenInNewTab } = useOpenInNewTabContext();
 
@@ -40,11 +43,7 @@ describe("OpenInNewTabContextProvider", () => {
   });
 
   it("initializes from storage", async () => {
-    (
-      chrome.storage.sync.get as jest.MockedFunction<
-        typeof chrome.storage.sync.get
-      >
-    ).mockImplementation((key, callback) => {
+    mockedChromeStorageSyncGet.mockImplementation((key, callback) => {
       callback({ [key as string]: true });
     });
 
@@ -55,11 +54,7 @@ describe("OpenInNewTabContextProvider", () => {
   });
 
   it("handles undefined saved in storage", async () => {
-    (
-      chrome.storage.sync.get as jest.MockedFunction<
-        typeof chrome.storage.sync.get
-      >
-    ).mockImplementation((key, callback) => {
+    mockedChromeStorageSyncGet.mockImplementation((key, callback) => {
       callback({});
     });
 

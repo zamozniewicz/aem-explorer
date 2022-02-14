@@ -8,6 +8,9 @@ import { ClientLibs } from "./client-libs";
 jest.mock("../../hooks/use-aem-page");
 jest.mock("../../hooks/use-debug");
 
+const mockedUseAemPage = useAemPage as jest.MockedFunction<typeof useAemPage>;
+const mockedUseDebug = useDebug as jest.MockedFunction<typeof useDebug>;
+
 describe("ClientLibs component", () => {
   const mockOpenAemPage = jest.fn();
   const mockHandleDebugChange = jest.fn();
@@ -17,11 +20,11 @@ describe("ClientLibs component", () => {
   });
 
   beforeEach(() => {
-    (useAemPage as jest.MockedFunction<typeof useAemPage>).mockReturnValue({
+    mockedUseAemPage.mockReturnValue({
       openAemPage: mockOpenAemPage,
     });
 
-    (useDebug as jest.MockedFunction<typeof useDebug>).mockReturnValue({
+    mockedUseDebug.mockReturnValue({
       debug: false,
       handleDebugChange: mockHandleDebugChange,
     });
