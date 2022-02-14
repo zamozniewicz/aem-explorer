@@ -1,4 +1,3 @@
-import { chrome } from "jest-chrome";
 import { asMock } from "../test/as-mock";
 import { mockTab } from "../model/mock-tab";
 import { getCurrentTab } from "./get-current-tab";

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { chrome } from "jest-chrome";
 import { asMock } from "../test/as-mock";
 import {
   OpenInNewTabContextProvider,

@@ -1,12 +1,15 @@
 import { FC, useContext } from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { asMock } from "../test/as-mock";
 import {
   ThemeAction,
   ThemeContext,
   ThemeContextProvider,
   themeReducer,
 } from "./theme-context";
+
+const mockedChromeStorageSyncGet = asMock(chrome.storage.sync.get);
 
 const MockComponent: FC = () => {
   const { theme, toggleThemeSize, toggleThemeColor } = useContext(ThemeContext);
