@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { screen, waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { asMock } from "../../test/as-mock";
 import { mockTab } from "../../model/mock-tab";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { getCurrentTab } from "../../utils/get-current-tab";
@@ -9,10 +10,8 @@ import { CurrentPageMode } from "./current-page-mode";
 jest.mock("../../hooks/use-aem-page");
 jest.mock("../../utils/get-current-tab");
 
-const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<
-  typeof getCurrentTab
->;
-const mockedUseAemPage = useAemPage as jest.MockedFunction<typeof useAemPage>;
+const mockedGetCurrentTab = asMock(getCurrentTab);
+const mockedUseAemPage = asMock(useAemPage);
 
 describe("CurrentPageMode component", () => {
   const mockOpenAemPage = jest.fn();

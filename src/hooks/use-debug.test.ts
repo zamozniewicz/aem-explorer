@@ -1,4 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
+import { asMock } from "../test/as-mock";
 import { debugClientLibs } from "../utils/debug-client-libs";
 import { isDebuggingClientLibs } from "../utils/is-debugging-client-libs";
 import { useDebug } from "./use-debug";
@@ -13,8 +14,7 @@ jest.mock("../contexts/open-in-new-tab-context", () => ({
   useOpenInNewTabContext: () => ({ openInNewTab: false }),
 }));
 
-const mockedIsDebuggingClientLibs =
-  isDebuggingClientLibs as jest.MockedFunction<typeof isDebuggingClientLibs>;
+const mockedIsDebuggingClientLibs = asMock(isDebuggingClientLibs);
 
 describe("useDebug hook", () => {
   it("allows you to switch debug mode", async () => {

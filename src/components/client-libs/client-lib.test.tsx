@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { asMock } from "../../test/as-mock";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { useDebug } from "../../hooks/use-debug";
 import { ClientLibs } from "./client-libs";
@@ -8,8 +9,8 @@ import { ClientLibs } from "./client-libs";
 jest.mock("../../hooks/use-aem-page");
 jest.mock("../../hooks/use-debug");
 
-const mockedUseAemPage = useAemPage as jest.MockedFunction<typeof useAemPage>;
-const mockedUseDebug = useDebug as jest.MockedFunction<typeof useDebug>;
+const mockedUseAemPage = asMock(useAemPage);
+const mockedUseDebug = asMock(useDebug);
 
 describe("ClientLibs component", () => {
   const mockOpenAemPage = jest.fn();

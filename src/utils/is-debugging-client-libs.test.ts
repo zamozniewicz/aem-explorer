@@ -1,10 +1,11 @@
+import { asMock } from "../test/as-mock";
 import { mockTab } from "../model/mock-tab";
 import { getCurrentTab } from "./get-current-tab";
 import { isDebuggingClientLibs } from "./is-debugging-client-libs";
 
 jest.mock("./get-current-tab");
 
-const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<typeof getCurrentTab>;
+const mockedGetCurrentTab = asMock(getCurrentTab);
 
 describe("isDebuggingClientLibs helper", () => {
   it("returns false for undefined url", async () => {

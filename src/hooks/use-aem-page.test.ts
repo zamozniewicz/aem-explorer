@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
+import { asMock } from "../test/as-mock";
 import { mockTab } from "../model/mock-tab";
 import { getCurrentTab } from "../utils/get-current-tab";
 import { isTab } from "../utils/is-tab";
@@ -16,10 +17,8 @@ jest.mock("../contexts/open-in-new-tab-context", () => ({
   useOpenInNewTabContext: () => ({ openInNewTab: false }),
 }));
 
-const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<
-  typeof getCurrentTab
->;
-const mockedIsTab = isTab as jest.MockedFunction<typeof isTab>;
+const mockedGetCurrentTab = asMock(getCurrentTab);
+const mockedIsTab = asMock(isTab);
 
 describe("useAemPage hook", () => {
   beforeEach(() => {

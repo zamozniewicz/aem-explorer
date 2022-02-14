@@ -1,4 +1,5 @@
 import { waitFor } from "@testing-library/react";
+import { asMock } from "../test/as-mock";
 import { setWcmMode } from "./set-wcm-mode";
 import { mockTab } from "../model/mock-tab";
 import { getCurrentTab } from "./get-current-tab";
@@ -11,10 +12,8 @@ jest.mock("./open-url");
 jest.mock("./get-current-tab");
 jest.mock("./is-tab");
 
-const mockedGetCurrentTab = getCurrentTab as jest.MockedFunction<
-  typeof getCurrentTab
->;
-const mockedIsTab = isTab as jest.MockedFunction<typeof isTab>;
+const mockedGetCurrentTab = asMock(getCurrentTab);
+const mockedIsTab = asMock(isTab);
 
 describe("setWcmMode helper", () => {
   beforeEach(() => {

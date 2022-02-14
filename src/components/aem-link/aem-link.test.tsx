@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { asMock } from "../../test/as-mock";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { AemLink } from "./aem-link";
 
@@ -11,7 +12,7 @@ jest.mock("../../contexts/open-in-new-tab-context", () => ({
   }),
 }));
 
-const mockedUseAemPage = useAemPage as jest.MockedFunction<typeof useAemPage>;
+const mockedUseAemPage = asMock(useAemPage);
 
 describe("AemLink component", () => {
   const mockOpenAemPage = jest.fn();

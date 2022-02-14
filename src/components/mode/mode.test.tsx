@@ -1,15 +1,14 @@
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { asMock } from "../../test/as-mock";
 import { wcmModes } from "../../model/modes";
-import { Mode } from "./mode";
 import { useCurrentWcmMode } from "../../hooks/use-current-wcm-mode";
+import { Mode } from "./mode";
 
 jest.mock("../../hooks/use-current-wcm-mode");
 
-const mockedUseCurrentWcmMode = useCurrentWcmMode as jest.MockedFunction<
-  typeof useCurrentWcmMode
->;
+const mockedUseCurrentWcmMode = asMock(useCurrentWcmMode);
 
 describe("Mode component", () => {
   beforeEach(() => {

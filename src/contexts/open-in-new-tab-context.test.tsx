@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { asMock } from "../test/as-mock";
 import {
   OpenInNewTabContextProvider,
   useOpenInNewTabContext,
@@ -8,8 +9,7 @@ import {
 
 Object.assign(global, require("jest-chrome"));
 
-const mockedChromeStorageSyncGet = chrome.storage.sync
-  .get as jest.MockedFunction<typeof chrome.storage.sync.get>;
+const mockedChromeStorageSyncGet = asMock(chrome.storage.sync.get);
 
 const MockComponent: FC = () => {
   const { openInNewTab, toggleOpenInNewTab } = useOpenInNewTabContext();
