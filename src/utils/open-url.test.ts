@@ -1,7 +1,5 @@
 import { openUrl } from "./open-url";
 
-Object.assign(global, require("jest-chrome"));
-
 describe("openUrl helper", () => {
   it("creates a new tab", () => {
     openUrl({ tabId: 0, url: "http://example.com", openInNewTab: true });

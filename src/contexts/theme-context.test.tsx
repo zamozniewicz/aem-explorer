@@ -8,8 +8,6 @@ import {
   themeReducer,
 } from "./theme-context";
 
-Object.assign(global, require("jest-chrome"));
-
 const MockComponent: FC = () => {
   const { theme, toggleThemeSize, toggleThemeColor } = useContext(ThemeContext);
   return (

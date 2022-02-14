@@ -6,8 +6,6 @@ import { getCurrentTab } from "./get-current-tab";
 import { openUrl } from "./open-url";
 import { isTab } from "./is-tab";
 
-Object.assign(global, require("jest-chrome"));
-
 jest.mock("./open-url");
 jest.mock("./get-current-tab");
 jest.mock("./is-tab");
