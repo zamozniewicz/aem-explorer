@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { asMock } from "../test/as-mock";
 import {
@@ -42,6 +42,30 @@ describe("ThemeContextProvider", () => {
 
     const heading = screen.getByRole("heading");
     expect(heading).toBeInTheDocument();
+  });
+
+  it("falls back to default settings when no theme is saved", () => {
+    mockedChromeStorageSyncGet.mockImplementationOnce((key: any, callback) => {
+      callback({});
+    });
+
+    setup();
+
+    expect(screen.getByTitle("size")).toHaveTextContent("compact");
+    expect(screen.getByTitle("color")).toHaveTextContent("dark");
+  });
+
+  it("restores saved theme", () => {
+    mockedChromeStorageSyncGet.mockImplementationOnce((key: any, callback) => {
+      callback({
+        [key]: { size: "comfortable", color: "light" },
+      });
+    });
+
+    setup();
+
+    expect(screen.getByTitle("size")).toHaveTextContent("comfortable");
+    expect(screen.getByTitle("color")).toHaveTextContent("light");
   });
 
   it("toggles theme size", () => {

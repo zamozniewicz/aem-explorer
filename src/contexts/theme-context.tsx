@@ -55,6 +55,7 @@ export const themeReducer = (state: Theme, action: ThemeAction): Theme => {
 
 export const ThemeContextProvider: FC = ({ children }) => {
   const [theme, themeDispatch] = useReducer(themeReducer, initialState);
+
   useEffect(() => {
     chrome.storage?.sync.get(themeStorageKey, (result) => {
       const savedTheme = result[themeStorageKey];
@@ -63,6 +64,7 @@ export const ThemeContextProvider: FC = ({ children }) => {
       }
     });
   }, []);
+
   useEffect(() => {
     chrome.storage?.sync.set({ [themeStorageKey]: theme });
   }, [theme]);
