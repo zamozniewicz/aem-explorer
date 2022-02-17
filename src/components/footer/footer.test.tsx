@@ -1,7 +1,6 @@
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { OpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 import { ThemeContext } from "../../contexts/theme-context";
 import { Footer } from "./footer";
 

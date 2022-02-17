@@ -55,6 +55,7 @@
     "eslint-plugin-testing-library": "^5.0.5",
     "husky": "^7.0.4",
     "jest-chrome": "^0.7.2",
+    "lint-staged": "^12.3.4",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -84,5 +85,8 @@
       "!src/index.tsx",
       "!src/**/*.stories.tsx"
     ]
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": "npm run lint"
   }
 }
