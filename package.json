@@ -12,7 +12,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext .ts,.tsx src",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public -o docs-build"
+    "build-storybook": "build-storybook -s public -o docs-build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@craco/craco": "^7.0.0-alpha.0",
@@ -52,6 +53,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.5.6",
     "eslint-plugin-testing-library": "^5.0.5",
+    "husky": "^7.0.4",
     "jest-chrome": "^0.7.2",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
