@@ -35,8 +35,9 @@ describe("ClientLibs component", () => {
     render(<ClientLibs />);
 
     const button = screen.getByRole("button");
-    const checkbox = screen.getByRole("checkbox");
     expect(button).toHaveTextContent("Dumplibs");
+
+    const checkbox = screen.getByRole("checkbox");
     expect(checkbox).not.toBeChecked();
   });
 

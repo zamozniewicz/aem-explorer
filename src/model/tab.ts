@@ -1,1 +1,3 @@
-export type Tab = chrome.tabs.Tab & { id: number; url: string };
+import browser from "webextension-polyfill";
+
+export type Tab = browser.Tabs.Tab & { id: number; url: string };

@@ -1,6 +1,7 @@
 import { FC, useContext } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import browser from "webextension-polyfill";
 import { asMock } from "../test/as-mock";
 import {
   ThemeAction,
@@ -8,8 +9,6 @@ import {
   ThemeContextProvider,
   themeReducer,
 } from "./theme-context";
-
-const mockedChromeStorageSyncGet = asMock(chrome.storage.sync.get);
 
 const MockComponent: FC = () => {
   const { theme, toggleThemeSize, toggleThemeColor } = useContext(ThemeContext);
@@ -45,9 +44,7 @@ describe("ThemeContextProvider", () => {
   });
 
   it("falls back to default settings when no theme is saved", () => {
-    mockedChromeStorageSyncGet.mockImplementationOnce((key: any, callback) => {
-      callback({});
-    });
+    mockBrowser.storage.sync.get.expect("aemExplorerTheme").andResolve({});
 
     setup();
 
@@ -56,10 +53,11 @@ describe("ThemeContextProvider", () => {
   });
 
   it("restores saved theme", () => {
-    mockedChromeStorageSyncGet.mockImplementationOnce((key: any, callback) => {
-      callback({
-        [key]: { size: "comfortable", color: "light" },
-      });
+    mockBrowser.storage.sync.get.expect("aemExplorerTheme").andResolve({
+      aemExplorerTheme: {
+        size: "comfortable",
+        color: "light",
+      },
     });
 
     setup();

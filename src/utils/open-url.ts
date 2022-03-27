@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 export const openUrl = ({
   tabId,
   url,
@@ -9,8 +11,8 @@ export const openUrl = ({
 }) => {
   const properties = { url };
   if (openInNewTab) {
-    chrome.tabs?.create(properties);
+    browser.tabs?.create(properties);
   } else {
-    chrome.tabs?.update(tabId, properties);
+    browser.tabs?.update(tabId, properties);
   }
 };

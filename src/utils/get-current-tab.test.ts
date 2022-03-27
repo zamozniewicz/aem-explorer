@@ -1,8 +1,9 @@
+import browser from "webextension-polyfill";
 import { asMock } from "../test/as-mock";
 import { mockTab } from "../model/mock-tab";
 import { getCurrentTab } from "./get-current-tab";
 
-const mockedChromeTabsQuery = asMock(chrome.tabs.query);
+const mockedBrowserTabsQuery = asMock(browser.tabs.query);
 
 describe("getCurrentTab helper", () => {
   const { location } = window;
@@ -17,16 +18,14 @@ describe("getCurrentTab helper", () => {
   });
 
   it("resolves with the current tab", async () => {
-    mockedChromeTabsQuery.mockImplementationOnce(() =>
-      Promise.resolve([mockTab()])
-    );
+    mockedBrowserTabsQuery.mockResolvedValueOnce([mockTab()]);
     await getCurrentTab();
 
-    expect(chrome.tabs.query).toHaveBeenCalled();
+    expect(browser.tabs.query).toHaveBeenCalled();
   });
 
   it("works in a browser environment", async () => {
-    (chrome.tabs as unknown) = undefined;
+    (browser.tabs as unknown) = undefined;
 
     const tab = await getCurrentTab();
     expect(tab.url).toBe("http://example.com");

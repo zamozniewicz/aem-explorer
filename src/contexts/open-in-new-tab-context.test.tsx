@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import browser from "webextension-polyfill";
 import { asMock } from "../test/as-mock";
 import {
   OpenInNewTabContextProvider,
   useOpenInNewTabContext,
 } from "./open-in-new-tab-context";
 
-const mockedChromeStorageSyncGet = asMock(chrome.storage.sync.get);
+const mockedBrowserStorageSyncGet = asMock(browser.storage.sync.get);
 
 const MockComponent: FC = () => {
   const { openInNewTab, toggleOpenInNewTab } = useOpenInNewTabContext();
@@ -41,8 +42,8 @@ describe("OpenInNewTabContextProvider", () => {
   });
 
   it("initializes from storage", async () => {
-    mockedChromeStorageSyncGet.mockImplementation((key, callback) => {
-      callback({ [key as string]: true });
+    mockedBrowserStorageSyncGet.mockResolvedValueOnce({
+      aemExplorerOpenInNewTab: true,
     });
 
     setup();
@@ -52,9 +53,7 @@ describe("OpenInNewTabContextProvider", () => {
   });
 
   it("handles undefined saved in storage", async () => {
-    mockedChromeStorageSyncGet.mockImplementation((key, callback) => {
-      callback({});
-    });
+    mockedBrowserStorageSyncGet.mockResolvedValueOnce({});
 
     setup();
 

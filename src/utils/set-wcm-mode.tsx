@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import { editorPath, WcmMode, wcmModeParam } from "../model/modes";
 import { Tab } from "../model/tab";
 import { getCurrentTab } from "./get-current-tab";
@@ -39,7 +40,7 @@ const setCookies = async (
   const url = getCookieUrl(tab);
 
   const pending = cookies.map(({ name, value }) => {
-    return chrome.cookies.set({
+    return browser.cookies.set({
       url,
       path: "/",
       name,

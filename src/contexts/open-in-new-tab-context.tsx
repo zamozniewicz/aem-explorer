@@ -1,4 +1,5 @@
 import React, { FC, useContext, useEffect, useMemo, useState } from "react";
+import browser from "webextension-polyfill";
 
 interface OpenInNewTabContextValues {
   openInNewTab: boolean;
@@ -16,14 +17,17 @@ const openInNewTabStorageKey = "aemExplorerOpenInNewTab";
 export const OpenInNewTabContextProvider: FC = ({ children }) => {
   const [openInNewTab, setOpenInNewTab] = useState<boolean>(false);
   useEffect(() => {
-    chrome.storage?.sync.get(openInNewTabStorageKey, (result) => {
-      const savedOpenInNewTab = result[openInNewTabStorageKey] || false;
-      setOpenInNewTab(savedOpenInNewTab);
-    });
+    const restoreFromStorage = async () => {
+      const saved = await browser.storage?.sync.get(openInNewTabStorageKey);
+      const restoredOpenInNewTab = saved[openInNewTabStorageKey] || false;
+      setOpenInNewTab(restoredOpenInNewTab);
+    };
+
+    restoreFromStorage();
   }, []);
 
   useEffect(() => {
-    chrome.storage?.sync.set({ [openInNewTabStorageKey]: openInNewTab });
+    browser.storage?.sync.set({ [openInNewTabStorageKey]: openInNewTab });
   }, [openInNewTab]);
 
   const toggleOpenInNewTab = () => {
@@ -31,7 +35,10 @@ export const OpenInNewTabContextProvider: FC = ({ children }) => {
   };
 
   const value = useMemo(
-    () => ({ openInNewTab, toggleOpenInNewTab }),
+    () => ({
+      openInNewTab,
+      toggleOpenInNewTab,
+    }),
     [openInNewTab]
   );
 

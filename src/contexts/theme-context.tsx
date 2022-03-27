@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect, useMemo, useReducer } from "react";
 import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material";
+import browser from "webextension-polyfill";
 
 const themeStorageKey = "aemExplorerTheme";
 
@@ -57,16 +58,19 @@ export const ThemeContextProvider: FC = ({ children }) => {
   const [theme, themeDispatch] = useReducer(themeReducer, initialState);
 
   useEffect(() => {
-    chrome.storage?.sync.get(themeStorageKey, (result) => {
-      const savedTheme = result[themeStorageKey];
+    const restoreSavedTheme = async () => {
+      const saved = await browser.storage?.sync.get(themeStorageKey);
+      const savedTheme = saved[themeStorageKey];
       if (savedTheme) {
         themeDispatch({ type: "reset", payload: savedTheme });
       }
-    });
+    };
+
+    restoreSavedTheme();
   }, []);
 
   useEffect(() => {
-    chrome.storage?.sync.set({ [themeStorageKey]: theme });
+    browser.storage?.sync.set({ [themeStorageKey]: theme });
   }, [theme]);
 
   const toggleThemeSize = () => {
