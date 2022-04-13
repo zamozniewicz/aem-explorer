@@ -9,7 +9,12 @@ export const useCurrentWcmMode = () => {
   const [currentWcmMode, setCurrentWcmMode] = useState<WcmMode | null>(null);
 
   useEffect(() => {
-    detectWcmMode().then((mode) => setCurrentWcmMode(mode));
+    const detectMode = async () => {
+      const mode = await detectWcmMode();
+      setCurrentWcmMode(mode);
+    };
+
+    detectMode();
   }, []);
 
   const handleWcmModeChange = (mode: WcmMode) => {

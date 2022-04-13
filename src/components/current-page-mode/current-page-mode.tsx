@@ -2,6 +2,7 @@ import { Button, ButtonGroup, Tooltip } from "@mui/material";
 import { FC } from "react";
 import { useThemeContext } from "../../contexts/theme-context";
 import { useAemPage } from "../../hooks/use-aem-page";
+import { editorPath } from "../../model/modes";
 import { getCurrentTab } from "../../utils/get-current-tab";
 import { isTab } from "../../utils/is-tab";
 import { Section } from "../section/section";
@@ -13,7 +14,6 @@ const pagePropertiesPathname =
   "/mnt/overlay/wcm/core/content/sites/properties.html";
 const pagePropertiesPrefix = `${pagePropertiesPathname}?item=`;
 const crxDePrefix = "/crx/de/index.jsp";
-const editPrefix = "/editor.html";
 
 const getPath = async (): Promise<string | null> => {
   const tab = await getCurrentTab();
@@ -37,7 +37,7 @@ const getPath = async (): Promise<string | null> => {
     return Promise.resolve(path);
   }
 
-  const path = url.pathname.replace(editPrefix, "").replace(".html", "");
+  const path = url.pathname.replace(editorPath, "").replace(".html", "");
   return Promise.resolve(path);
 };
 
@@ -50,7 +50,7 @@ const getPathname = (pageMode: PageMode, path: string): string => {
     return `${pagePropertiesPrefix}${path}`;
   }
 
-  return `${editPrefix}${path}.html`;
+  return `${editorPath}${path}.html`;
 };
 
 export const CurrentPageMode: FC = () => {
