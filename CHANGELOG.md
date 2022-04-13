@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.10 (April 13, 2022)
+
+* Modify the layout of the popup
+* Fix detecting WCM mode
+* Close poup on redirects
+
 ## 0.0.9 (February 14, 2022)
 
 * Adjust layout
