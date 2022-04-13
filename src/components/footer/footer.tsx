@@ -1,4 +1,12 @@
-import { AppBar, Toolbar, Box, Tooltip, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Tooltip,
+  IconButton,
+  Typography,
+  Stack,
+} from "@mui/material";
 import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
@@ -11,6 +19,16 @@ export const Footer = () => {
   return (
     <AppBar position="sticky" color="primary" sx={{ top: "auto", bottom: 0 }}>
       <Toolbar>
+        <Stack direction="row" alignItems="center" spacing={1.5}>
+          <img
+            src="icons/icon-128.png"
+            alt="AEM Explorer logo"
+            width="20"
+            height="20"
+          />
+          <Typography variant="body1">AEM Explorer</Typography>
+        </Stack>
+
         <Box sx={{ flexGrow: 1 }} />
 
         <Tooltip

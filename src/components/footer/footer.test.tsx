@@ -5,6 +5,12 @@ import { ThemeContext } from "../../contexts/theme-context";
 import { Footer } from "./footer";
 
 describe("Footer component", () => {
+  it("renders logo", () => {
+    render(<Footer />);
+
+    expect(screen.getByAltText("AEM Explorer logo")).toBeInTheDocument();
+  });
+
   describe("Theme color", () => {
     it("renders color switch in light theme", () => {
       render(

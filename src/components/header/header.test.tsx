@@ -5,12 +5,6 @@ import { OpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 import { Header } from "./header";
 
 describe("Header component", () => {
-  it("renders logo", () => {
-    render(<Header />);
-
-    expect(screen.getByAltText("AEM Explorer logo")).toBeInTheDocument();
-  });
-
   describe("New tab switch", () => {
     it("renders checked new tab switch", () => {
       render(

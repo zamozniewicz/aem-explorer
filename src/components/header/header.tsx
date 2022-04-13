@@ -1,13 +1,5 @@
 import { FC } from "react";
-import {
-  AppBar,
-  Box,
-  FormControlLabel,
-  Stack,
-  Switch,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, FormControlLabel, Switch, Toolbar } from "@mui/material";
 import { useOpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
 
 export const Header: FC = () => {
@@ -15,28 +7,20 @@ export const Header: FC = () => {
 
   return (
     <AppBar position="sticky" color="primary">
-      <Toolbar>
-        <Stack direction="row" alignItems="center" spacing={1.5}>
-          <img
-            src="icons/icon-128.png"
-            alt="AEM Explorer logo"
-            width="20"
-            height="20"
-          />
-          <Typography variant="body1">AEM Explorer</Typography>
-        </Stack>
-        <Box sx={{ flexGrow: 1 }} />
+      <Toolbar variant="dense">
         <FormControlLabel
           sx={{ mx: 2 }}
           control={
             <Switch
               size="small"
+              color="default"
               checked={openInNewTab}
               onChange={() => toggleOpenInNewTab()}
             />
           }
-          label="New tab"
+          label="Open in new tab"
         />
+        <Box sx={{ flexGrow: 1 }} />
       </Toolbar>
     </AppBar>
   );

@@ -27,6 +27,7 @@ export const ClientLibs: FC = () => {
           control={
             <Switch
               size="small"
+              color="default"
               checked={debug}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleDebugChange(event.target.checked)
