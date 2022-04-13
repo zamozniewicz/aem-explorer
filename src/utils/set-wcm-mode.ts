@@ -4,6 +4,17 @@ import { getCurrentTab } from "./get-current-tab";
 import { isTab } from "./is-tab";
 import { openUrl } from "./open-url";
 
+const previewCookies = [
+  { name: "wcmmode", value: "preview" },
+  { name: "cq-editor-layer.page", value: "Preview" },
+  { name: "cq-editor-sidepanel", value: "closed" },
+];
+
+const touchCookies = [
+  { name: "wcmmode", value: "edit" },
+  { name: "cq-editor-layer.page", value: "Edit" },
+];
+
 const getDisabledWcmUrl = (tab: Tab): string => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
@@ -15,16 +26,6 @@ const getDisabledWcmUrl = (tab: Tab): string => {
 
   return url.toString();
 };
-
-const previewCookies = [
-  { name: "wcmmode", value: "preview" },
-  { name: "cq-editor-layer.page", value: "Preview" },
-  { name: "cq-editor-sidepanel", value: "closed" },
-];
-const touchCookies = [
-  { name: "wcmmode", value: "edit" },
-  { name: "cq-editor-layer.page", value: "Edit" },
-];
 
 const getCookieUrl = (tab: Tab): string => {
   const { protocol, hostname } = new URL(tab.url);
@@ -61,11 +62,13 @@ const setWcmModeDisabled = (tab: Tab, openInNewTab = false) => {
 const getModeUrl = (tab: Tab, mode: WcmMode): string => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
+
   if (mode === "touch" || mode === null) {
     searchParams.delete(wcmModeParam);
   } else {
     searchParams.set(wcmModeParam, mode);
   }
+
   url.search = searchParams.toString();
 
   if (!url.pathname.startsWith(editorPath)) {

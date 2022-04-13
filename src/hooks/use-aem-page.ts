@@ -16,6 +16,8 @@ export const useAemPage = () => {
     const { origin } = new URL(tab.url);
     const url = `${origin}${pathname}`;
     openUrl({ tabId: tab.id, url, openInNewTab });
+
+    window.close();
   };
 
   return { openAemPage };

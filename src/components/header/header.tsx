@@ -18,7 +18,7 @@ export const Header: FC = () => {
               onChange={() => toggleOpenInNewTab()}
             />
           }
-          label="Open in new tab"
+          label="New tab"
         />
         <Box sx={{ flexGrow: 1 }} />
       </Toolbar>

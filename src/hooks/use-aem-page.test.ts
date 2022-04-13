@@ -19,10 +19,18 @@ jest.mock("../contexts/open-in-new-tab-context", () => ({
 
 const mockedGetCurrentTab = asMock(getCurrentTab);
 const mockedIsTab = asMock(isTab);
+const mockedWindowClose = jest.fn();
+const originalWindowClose = window.close;
 
 describe("useAemPage hook", () => {
   beforeEach(() => {
+    window.close = mockedWindowClose;
+
     jest.clearAllMocks();
+  });
+
+  afterEach(() => {
+    window.close = originalWindowClose;
   });
 
   it("allows you to change pathname", async () => {
@@ -39,9 +47,19 @@ describe("useAemPage hook", () => {
     });
   });
 
-  it("ignores change when tab is not set", async () => {
+  it("closes popup when called", async () => {
+    mockedIsTab.mockReturnValueOnce(true);
     mockedGetCurrentTab.mockResolvedValueOnce(mockTab());
+
+    const { result } = renderHook(() => useAemPage());
+
+    await result.current.openAemPage("/sample/path");
+    expect(mockedWindowClose).toHaveBeenCalledWith();
+  });
+
+  it("ignores change when tab is not set", async () => {
     mockedIsTab.mockReturnValueOnce(false);
+    mockedGetCurrentTab.mockResolvedValueOnce(mockTab());
 
     const { result } = renderHook(() => useAemPage());
 

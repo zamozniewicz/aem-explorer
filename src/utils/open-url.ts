@@ -13,4 +13,6 @@ export const openUrl = ({
   } else {
     chrome.tabs?.update(tabId, properties);
   }
+
+  window.close();
 };

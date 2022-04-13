@@ -7,6 +7,7 @@ import { setWcmMode } from "../utils/set-wcm-mode";
 export const useCurrentWcmMode = () => {
   const { openInNewTab } = useOpenInNewTabContext();
   const [currentWcmMode, setCurrentWcmMode] = useState<WcmMode | null>(null);
+
   useEffect(() => {
     detectWcmMode().then((mode) => setCurrentWcmMode(mode));
   }, []);
