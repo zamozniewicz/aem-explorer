@@ -57,8 +57,8 @@ export const ThemeContextProvider: FC = ({ children }) => {
   const [theme, themeDispatch] = useReducer(themeReducer, initialState);
 
   useEffect(() => {
-    chrome.storage?.sync.get(themeStorageKey, (result) => {
-      const savedTheme = result[themeStorageKey];
+    chrome.storage?.sync.get(themeStorageKey, (storage) => {
+      const savedTheme = storage[themeStorageKey];
       if (savedTheme) {
         themeDispatch({ type: "reset", payload: savedTheme });
       }

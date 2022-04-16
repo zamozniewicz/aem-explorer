@@ -16,9 +16,9 @@ const openInNewTabStorageKey = "aemExplorerOpenInNewTab";
 export const OpenInNewTabContextProvider: FC = ({ children }) => {
   const [openInNewTab, setOpenInNewTab] = useState<boolean>(false);
   useEffect(() => {
-    chrome.storage?.sync.get(openInNewTabStorageKey, (result) => {
-      const savedOpenInNewTab = result[openInNewTabStorageKey] || false;
-      setOpenInNewTab(savedOpenInNewTab);
+    chrome.storage?.sync.get(openInNewTabStorageKey, (storage) => {
+      const saved = storage[openInNewTabStorageKey] || false;
+      setOpenInNewTab(saved);
     });
   }, []);
 

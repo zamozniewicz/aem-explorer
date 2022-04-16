@@ -10,6 +10,7 @@ import {
   useThemeContext,
 } from "../../contexts/theme-context";
 import { OpenInNewTabContextProvider } from "../../contexts/open-in-new-tab-context";
+import { PersistDisabledContextProvider } from "../../contexts/persist-disabled-context";
 import { Footer } from "../footer/footer";
 import { Mode } from "../mode/mode";
 import { ClientLibs } from "../client-libs/client-libs";
@@ -33,22 +34,24 @@ export const App: FC = () => {
       />
       <ThemeContextProvider>
         <OpenInNewTabContextProvider>
-          <Container
-            maxWidth="sm"
-            sx={{
-              px: theme.size === "compact" ? 0 : 2,
-              bgcolor: "background.paper",
-            }}
-          >
-            <Header />
-            <Box role="main" sx={{ mt: theme.size === "compact" ? 1 : 2 }}>
-              <Mode />
-              <CurrentPageMode />
-              <Links linksGroups={linksGroups} />
-              <ClientLibs />
-            </Box>
-            <Footer />
-          </Container>
+          <PersistDisabledContextProvider>
+            <Container
+              maxWidth="sm"
+              sx={{
+                px: theme.size === "compact" ? 0 : 2,
+                bgcolor: "background.paper",
+              }}
+            >
+              <Header />
+              <Box role="main" sx={{ mt: theme.size === "compact" ? 1 : 2 }}>
+                <Mode />
+                <CurrentPageMode />
+                <Links linksGroups={linksGroups} />
+                <ClientLibs />
+              </Box>
+              <Footer />
+            </Container>
+          </PersistDisabledContextProvider>
         </OpenInNewTabContextProvider>
       </ThemeContextProvider>
     </>
