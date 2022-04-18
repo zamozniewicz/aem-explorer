@@ -24,7 +24,7 @@ export const Header: FC = () => {
           label="New tab"
         />
         <Box sx={{ flexGrow: 1 }} />
-        {/* <FormControlLabel
+        <FormControlLabel
           sx={{ mx: 2 }}
           control={
             <Switch
@@ -35,7 +35,7 @@ export const Header: FC = () => {
             />
           }
           label="Persist disabled mode"
-        /> */}
+        />
       </Toolbar>
     </AppBar>
   );
