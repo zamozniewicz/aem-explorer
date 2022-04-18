@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.11 (April 18, 2022)
+
+* Persit WCM disabled mode
+
 ## 0.0.10 (April 13, 2022)
 
 * Modify the layout of the popup
