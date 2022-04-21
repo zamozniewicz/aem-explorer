@@ -10,9 +10,6 @@ jest.mock("../utils/debug-client-libs", () => ({
 jest.mock("../utils/is-debugging-client-libs", () => ({
   isDebuggingClientLibs: jest.fn(),
 }));
-jest.mock("../contexts/open-in-new-tab-context", () => ({
-  useOpenInNewTabContext: () => ({ openInNewTab: false }),
-}));
 
 const mockedIsDebuggingClientLibs = asMock(isDebuggingClientLibs);
 

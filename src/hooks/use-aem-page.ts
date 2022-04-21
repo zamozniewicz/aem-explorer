@@ -1,10 +1,10 @@
 import { getCurrentTab } from "../utils/get-current-tab";
 import { isTab } from "../utils/is-tab";
 import { openUrl } from "../utils/open-url";
-import { useOpenInNewTabContext } from "../contexts/open-in-new-tab-context";
+import { useOpenInNewTab } from "./use-open-in-new-tab";
 
 export const useAemPage = () => {
-  const { openInNewTab } = useOpenInNewTabContext();
+  const [openInNewTab] = useOpenInNewTab();
 
   const openAemPage = async (pathname: string) => {
     const tab = await getCurrentTab();

@@ -1,41 +1,39 @@
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { OpenInNewTabContext } from "../../contexts/open-in-new-tab-context";
-import { PersistDisabledContext } from "../../contexts/persist-disabled-context";
+import { asMock } from "../../test/as-mock";
+import { useOpenInNewTab } from "../../hooks/use-open-in-new-tab";
+import { usePersistDisabled } from "../../hooks/use-persist-disabled";
 import { Header } from "./header";
 
+jest.mock("../../hooks/use-open-in-new-tab");
+jest.mock("../../hooks/use-persist-disabled");
+
+const mockedUseOpenInNewTab = asMock(useOpenInNewTab);
+const mockedUsePersistDisabled = asMock(usePersistDisabled);
+
 describe("Header component", () => {
+  beforeEach(() => {
+    mockedUseOpenInNewTab.mockReturnValue([false, () => {}]);
+    mockedUsePersistDisabled.mockReturnValue([false, () => {}]);
+  });
+
   describe("New tab switch", () => {
     const newTabName = "New tab";
 
     it("renders checked new tab switch", () => {
-      render(
-        <OpenInNewTabContext.Provider
-          value={{
-            openInNewTab: false,
-            toggleOpenInNewTab: () => {},
-          }}
-        >
-          <Header />
-        </OpenInNewTabContext.Provider>
-      );
+      mockedUseOpenInNewTab.mockReturnValue([false, () => {}]);
+
+      render(<Header />);
 
       const newTabSwitch = screen.getByRole("checkbox", { name: newTabName });
       expect(newTabSwitch).not.toBeChecked();
     });
 
     it("renders checked new tab switch", () => {
-      render(
-        <OpenInNewTabContext.Provider
-          value={{
-            openInNewTab: true,
-            toggleOpenInNewTab: () => {},
-          }}
-        >
-          <Header />
-        </OpenInNewTabContext.Provider>
-      );
+      mockedUseOpenInNewTab.mockReturnValue([true, () => {}]);
+
+      render(<Header />);
 
       const newTabSwitch = screen.getByRole("checkbox", { name: newTabName });
       expect(newTabSwitch).toBeChecked();
@@ -43,17 +41,9 @@ describe("Header component", () => {
 
     it("toggles tab switch", () => {
       const mockToggleOpenInNewTab = jest.fn();
+      mockedUseOpenInNewTab.mockReturnValue([true, mockToggleOpenInNewTab]);
 
-      render(
-        <OpenInNewTabContext.Provider
-          value={{
-            openInNewTab: false,
-            toggleOpenInNewTab: mockToggleOpenInNewTab,
-          }}
-        >
-          <Header />
-        </OpenInNewTabContext.Provider>
-      );
+      render(<Header />);
 
       const newTabSwitch = screen.getByRole("checkbox", { name: newTabName });
 
@@ -66,16 +56,9 @@ describe("Header component", () => {
     const persistDisabledName = "Persist disabled mode";
 
     it("renders persist disabled switch", () => {
-      render(
-        <PersistDisabledContext.Provider
-          value={{
-            persistDisabled: false,
-            togglePersistDisabled: () => {},
-          }}
-        >
-          <Header />
-        </PersistDisabledContext.Provider>
-      );
+      mockedUsePersistDisabled.mockReturnValue([false, () => {}]);
+
+      render(<Header />);
 
       const persistDisabled = screen.getByRole("checkbox", {
         name: persistDisabledName,
@@ -84,16 +67,9 @@ describe("Header component", () => {
     });
 
     it("renders checked persist disabled switch", () => {
-      render(
-        <PersistDisabledContext.Provider
-          value={{
-            persistDisabled: true,
-            togglePersistDisabled: () => {},
-          }}
-        >
-          <Header />
-        </PersistDisabledContext.Provider>
-      );
+      mockedUsePersistDisabled.mockReturnValue([true, () => {}]);
+
+      render(<Header />);
 
       const newPersitDisabledSwitch = screen.getByRole("checkbox", {
         name: persistDisabledName,
@@ -103,17 +79,12 @@ describe("Header component", () => {
 
     it("toggles tab switch", () => {
       const mockTogglePersistDisabled = jest.fn();
+      mockedUsePersistDisabled.mockReturnValue([
+        false,
+        mockTogglePersistDisabled,
+      ]);
 
-      render(
-        <PersistDisabledContext.Provider
-          value={{
-            persistDisabled: false,
-            togglePersistDisabled: mockTogglePersistDisabled,
-          }}
-        >
-          <Header />
-        </PersistDisabledContext.Provider>
-      );
+      render(<Header />);
 
       const newPersitDisabledSwitch = screen.getByRole("checkbox", {
         name: persistDisabledName,

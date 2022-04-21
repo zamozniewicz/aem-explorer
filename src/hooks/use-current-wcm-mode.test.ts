@@ -1,6 +1,8 @@
 import { renderHook, act } from "@testing-library/react-hooks";
+import { asMock } from "../test/as-mock";
 import { setWcmMode } from "../utils/set-wcm-mode";
 import { useCurrentWcmMode } from "./use-current-wcm-mode";
+import { useOpenInNewTab } from "./use-open-in-new-tab";
 
 jest.mock("../utils/set-wcm-mode", () => ({
   setWcmMode: jest.fn(),
@@ -8,11 +10,15 @@ jest.mock("../utils/set-wcm-mode", () => ({
 jest.mock("../utils/detect-wcm-mode", () => ({
   detectWcmMode: () => Promise.resolve("disabled"),
 }));
-jest.mock("../contexts/open-in-new-tab-context", () => ({
-  useOpenInNewTabContext: () => ({ openInNewTab: false }),
-}));
+jest.mock("./use-open-in-new-tab");
+
+const mockedUseOpenInNewTab = asMock(useOpenInNewTab);
 
 describe("useCurrentWcmMode hook", () => {
+  beforeEach(() => {
+    mockedUseOpenInNewTab.mockReturnValue([false, () => {}]);
+  });
+
   it("allows you to switch wcm modes", async () => {
     const { result, waitForNextUpdate } = renderHook(() => useCurrentWcmMode());
     await waitForNextUpdate();

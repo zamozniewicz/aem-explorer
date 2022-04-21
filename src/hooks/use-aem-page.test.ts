@@ -13,9 +13,6 @@ jest.mock("../utils/is-tab");
 jest.mock("../utils/open-url", () => ({
   openUrl: jest.fn(),
 }));
-jest.mock("../contexts/open-in-new-tab-context", () => ({
-  useOpenInNewTabContext: () => ({ openInNewTab: false }),
-}));
 
 const mockedGetCurrentTab = asMock(getCurrentTab);
 const mockedIsTab = asMock(isTab);
