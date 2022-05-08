@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.12 (May 08, 2022)
+
+* Open new tab next to the current one
+
 ## 0.0.11 (April 18, 2022)
 
 * Persit WCM disabled mode
