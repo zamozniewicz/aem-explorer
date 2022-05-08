@@ -22,22 +22,21 @@ describe("openUrl helper", () => {
     openUrl({ tab, url: "http://example.com", openInNewTab: true });
 
     expect(chrome.tabs.create).toHaveBeenCalledWith({
-      index: 0,
+      index: 1,
       url: "http://example.com",
     });
   });
 
   it("creates a new tab next to the current one", () => {
-    const currentIndex = 2;
     openUrl({
-      tab: { ...tab, index: currentIndex },
+      tab: { ...tab, index: 2 },
       url: "http://example.com",
       openInNewTab: true,
     });
 
     expect(chrome.tabs.create).toHaveBeenCalledWith(
       expect.objectContaining({
-        index: currentIndex,
+        index: 3,
       })
     );
   });

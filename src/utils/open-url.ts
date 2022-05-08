@@ -10,7 +10,7 @@ export const openUrl = ({
   openInNewTab?: boolean;
 }) => {
   if (openInNewTab) {
-    chrome.tabs?.create({ url, index: tab.index });
+    chrome.tabs?.create({ url, index: tab.index + 1 });
   } else {
     chrome.tabs?.update(tab.id, { url });
   }
