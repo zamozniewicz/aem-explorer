@@ -12,6 +12,7 @@ jest.mock("./is-tab");
 
 const mockedGetCurrentTab = asMock(getCurrentTab);
 const mockedIsTab = asMock(isTab);
+const mockedTab = mockTab();
 
 describe("setWcmMode helper", () => {
   beforeEach(() => {
@@ -23,17 +24,16 @@ describe("setWcmMode helper", () => {
   });
 
   it("sets wcmmode=disabled", async () => {
-    mockedGetCurrentTab.mockResolvedValue(
-      mockTab({
-        url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
-      })
-    );
+    const tab = mockTab({
+      url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
+    });
 
+    mockedGetCurrentTab.mockResolvedValue(tab);
     setWcmMode("disabled", false);
 
     await waitFor(() => {
       expect(openUrl).toHaveBeenCalledWith({
-        tabId: 0,
+        tab,
         url: "http://localhost:4502/content/en.html?wcmmode=disabled",
         openInNewTab: false,
       });
@@ -41,17 +41,16 @@ describe("setWcmMode helper", () => {
   });
 
   it("sets edit wcmmode", async () => {
-    mockedGetCurrentTab.mockResolvedValue(
-      mockTab({
-        url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
-      })
-    );
+    const tab = mockTab({
+      url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
+    });
+    mockedGetCurrentTab.mockResolvedValue(tab);
 
     setWcmMode("touch", false);
 
     await waitFor(() => {
       expect(openUrl).toHaveBeenCalledWith({
-        tabId: 0,
+        tab,
         url: "http://localhost:4502/editor.html/content/en.html",
         openInNewTab: false,
       });
@@ -79,7 +78,7 @@ describe("setWcmMode helper", () => {
 
     await waitFor(() => {
       expect(openUrl).toHaveBeenCalledWith({
-        tabId: 0,
+        tab: mockedTab,
         url: "http://localhost:4502/editor.html/content/en.html?wcmmode=preview",
         openInNewTab: false,
       });
@@ -114,7 +113,7 @@ describe("setWcmMode helper", () => {
 
     await waitFor(() => {
       expect(openUrl).toHaveBeenCalledWith({
-        tabId: 0,
+        tab: mockedTab,
         url: "http://localhost:4502/editor.html/content/en.html?wcmmode=design",
         openInNewTab: false,
       });

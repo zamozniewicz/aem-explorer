@@ -14,6 +14,7 @@ jest.mock("./is-tab");
 
 const mockedGetCurrentTab = asMock(getCurrentTab);
 const mockedIsTab = asMock(isTab);
+const mockedTab = mockTab();
 
 describe("debugClientLibs helper", () => {
   beforeEach(() => {
@@ -31,26 +32,25 @@ describe("debugClientLibs helper", () => {
 
     await waitFor(() => {
       expect(openUrl).toHaveBeenCalledWith({
+        tab: mockedTab,
         url: "http://localhost:4502/content/en.html?debugClientLibs=true",
-        tabId: 0,
         openInNewTab: true,
       });
     });
   });
 
   it("removes search param", async () => {
-    mockedGetCurrentTab.mockResolvedValueOnce(
-      mockTab({
-        url: "http://localhost:4502/content/en.html?foo=bar&debugClientLibs=true",
-      })
-    );
+    const tab = mockTab({
+      url: "http://localhost:4502/content/en.html?foo=bar&debugClientLibs=true",
+    });
+    mockedGetCurrentTab.mockResolvedValueOnce(tab);
 
     debugClientLibs(false, true);
 
     await waitFor(() => {
       expect(openUrl).toHaveBeenCalledWith({
+        tab,
         url: "http://localhost:4502/content/en.html?foo=bar",
-        tabId: 0,
         openInNewTab: true,
       });
     });

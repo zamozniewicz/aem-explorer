@@ -6,6 +6,7 @@ import { editorPath } from "../../model/modes";
 import { getCurrentTab } from "../../utils/get-current-tab";
 import { isTab } from "../../utils/is-tab";
 import { Section } from "../section/section";
+import { SectionTitle } from "../section/section-title";
 
 const pageModes = ["edit", "crxde", "properties"] as const;
 type PageMode = typeof pageModes[number];
@@ -69,7 +70,7 @@ export const CurrentPageMode: FC = () => {
 
   return (
     <Section>
-      <Section.Title>Open current path in</Section.Title>
+      <SectionTitle>Open current path in</SectionTitle>
       <ButtonGroup
         fullWidth
         size={theme.size === "compact" ? "small" : "medium"}

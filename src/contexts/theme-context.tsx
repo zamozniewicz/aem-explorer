@@ -69,28 +69,27 @@ export const ThemeContextProvider: FC = ({ children }) => {
     chrome.storage?.sync.set({ [themeStorageKey]: theme });
   }, [theme]);
 
-  const toggleThemeSize = () => {
-    themeDispatch({
-      type: "size",
-      payload: theme.size === "comfortable" ? "compact" : "comfortable",
-    });
-  };
+  const value = useMemo(() => {
+    const toggleThemeSize = () => {
+      themeDispatch({
+        type: "size",
+        payload: theme.size === "comfortable" ? "compact" : "comfortable",
+      });
+    };
 
-  const toggleThemeColor = () => {
-    themeDispatch({
-      type: "color",
-      payload: theme.color === "light" ? "dark" : "light",
-    });
-  };
+    const toggleThemeColor = () => {
+      themeDispatch({
+        type: "color",
+        payload: theme.color === "light" ? "dark" : "light",
+      });
+    };
 
-  const value = useMemo(
-    () => ({
+    return {
       theme,
       toggleThemeSize,
       toggleThemeColor,
-    }),
-    [theme]
-  );
+    };
+  }, [theme]);
 
   return (
     <ThemeProvider

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { usePreferencesContext } from "../contexts/preferences-context";
 import { WcmMode } from "../model/modes";
 import { detectWcmMode } from "../utils/detect-wcm-mode";
 import { setWcmMode } from "../utils/set-wcm-mode";
-import { useOpenInNewTab } from "./use-open-in-new-tab";
 
 export const useCurrentWcmMode = () => {
-  const [openInNewTab] = useOpenInNewTab();
+  const { openInNewTab } = usePreferencesContext();
   const [currentWcmMode, setCurrentWcmMode] = useState<WcmMode | null>(null);
 
   useEffect(() => {

@@ -3,14 +3,12 @@ import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 import { asMock } from "../../test/as-mock";
 import { useAemPage } from "../../hooks/use-aem-page";
-import { useOpenInNewTab } from "../../hooks/use-open-in-new-tab";
 import { AemLink } from "./aem-link";
 
 jest.mock("../../hooks/use-aem-page");
 jest.mock("../../hooks/use-open-in-new-tab");
 
 const mockedUseAemPage = asMock(useAemPage);
-const mockedUseOpenInNewTab = asMock(useOpenInNewTab);
 
 describe("AemLink component", () => {
   const mockOpenAemPage = jest.fn();

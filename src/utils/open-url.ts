@@ -1,17 +1,18 @@
+import { Tab } from "../model/tab";
+
 export const openUrl = ({
-  tabId,
+  tab,
   url,
   openInNewTab = false,
 }: {
-  tabId: number;
+  tab: Tab;
   url: string;
   openInNewTab?: boolean;
 }) => {
-  const properties = { url };
   if (openInNewTab) {
-    chrome.tabs?.create(properties);
+    chrome.tabs?.create({ url, index: tab.index });
   } else {
-    chrome.tabs?.update(tabId, properties);
+    chrome.tabs?.update(tab.id, { url });
   }
 
   window.close();

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { AppBar, Box, FormControlLabel, Switch, Toolbar } from "@mui/material";
-import { useOpenInNewTab } from "../../hooks/use-open-in-new-tab";
 import { usePersistDisabled } from "../../hooks/use-persist-disabled";
+import { usePreferencesContext } from "../../contexts/preferences-context";
 
 export const Header: FC = () => {
-  const [openInNewTab, toggleOpenInNewTab] = useOpenInNewTab();
+  const { openInNewTab, toggleOpenInNewTab } = usePreferencesContext();
   const [persistDisabled, togglePersistDisabled] = usePersistDisabled();
 
   return (

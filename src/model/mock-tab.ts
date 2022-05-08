@@ -1,6 +1,6 @@
-export const mockTab = (
-  tab: Partial<chrome.tabs.Tab> = {}
-): chrome.tabs.Tab => ({
+import { Tab } from "./tab";
+
+export const mockTab = (tab: Partial<chrome.tabs.Tab> = {}): Tab => ({
   id: 0,
   groupId: 0,
   windowId: 0,

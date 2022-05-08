@@ -4,6 +4,7 @@ import { useThemeContext } from "../../contexts/theme-context";
 import { useDebug } from "../../hooks/use-debug";
 import { useAemPage } from "../../hooks/use-aem-page";
 import { Section } from "../section/section";
+import { SectionTitle } from "../section/section-title";
 
 export const ClientLibs: FC = () => {
   const { debug, handleDebugChange } = useDebug();
@@ -12,7 +13,7 @@ export const ClientLibs: FC = () => {
 
   return (
     <Section>
-      <Section.Title>ClientLibs</Section.Title>
+      <SectionTitle>ClientLibs</SectionTitle>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
           size={theme.size === "compact" ? "small" : "medium"}

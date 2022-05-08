@@ -17,6 +17,7 @@ jest.mock("../utils/open-url", () => ({
 const mockedGetCurrentTab = asMock(getCurrentTab);
 const mockedIsTab = asMock(isTab);
 const mockedWindowClose = jest.fn();
+const mockedTab = mockTab();
 const originalWindowClose = window.close;
 
 describe("useAemPage hook", () => {
@@ -30,7 +31,7 @@ describe("useAemPage hook", () => {
     window.close = originalWindowClose;
   });
 
-  it("allows you to change pathname", async () => {
+  it("allows to change pathname", async () => {
     mockedIsTab.mockReturnValueOnce(true);
     mockedGetCurrentTab.mockResolvedValueOnce(mockTab());
 
@@ -38,7 +39,7 @@ describe("useAemPage hook", () => {
 
     await result.current.openAemPage("/sample/path");
     expect(openUrl).toHaveBeenCalledWith({
-      tabId: 0,
+      tab: mockedTab,
       url: "http://localhost:4502/sample/path",
       openInNewTab: false,
     });

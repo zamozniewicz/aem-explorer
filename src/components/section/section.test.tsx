@@ -3,6 +3,7 @@ import { screen } from "@testing-library/dom";
 import { ToggleButton } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme-context";
 import { Section } from "./section";
+import { SectionTitle } from "./section-title";
 
 describe("Section component", () => {
   it("renders content", () => {
@@ -21,7 +22,7 @@ describe("Section component", () => {
             toggleThemeColor: () => {},
           }}
         >
-          <Section.Title>Title</Section.Title>
+          <SectionTitle>Title</SectionTitle>
         </ThemeContext.Provider>
       );
 
@@ -37,7 +38,7 @@ describe("Section component", () => {
             toggleThemeColor: () => {},
           }}
         >
-          <Section.Title>Title</Section.Title>
+          <SectionTitle>Title</SectionTitle>
         </ThemeContext.Provider>
       );
 

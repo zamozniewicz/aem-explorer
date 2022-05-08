@@ -22,5 +22,5 @@ export const debugClientLibs = async (
   }
   url.search = searchParams.toString();
 
-  openUrl({ tabId: tab.id, url: url.toString(), openInNewTab });
+  openUrl({ tab, url: url.toString(), openInNewTab });
 };

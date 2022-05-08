@@ -18,6 +18,7 @@ const touchCookies = [
 const getDisabledWcmUrl = (tab: Tab): string => {
   const url = new URL(tab.url);
   const searchParams = new URLSearchParams(url.search);
+
   searchParams.set(wcmModeParam, "disabled");
   url.search = searchParams.toString();
   if (url.pathname.startsWith(editorPath)) {
@@ -53,7 +54,7 @@ const setCookies = async (
 
 const setWcmModeDisabled = (tab: Tab, openInNewTab = false) => {
   openUrl({
-    tabId: tab.id,
+    tab,
     url: getDisabledWcmUrl(tab),
     openInNewTab,
   });
@@ -99,7 +100,7 @@ export const setWcmMode = async (mode: WcmMode, openInNewTab = false) => {
   }
 
   openUrl({
-    tabId: tab.id,
+    tab,
     url: getModeUrl(tab, mode),
     openInNewTab,
   });

@@ -1,5 +1,3 @@
-import React from "react";
-
 const persistDisabledStorageKey = "aemExplorerPersistDisabled";
 const wcmModeParam = "wcmmode";
 

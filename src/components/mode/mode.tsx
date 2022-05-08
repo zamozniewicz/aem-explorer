@@ -3,6 +3,7 @@ import { ToggleButton, Tooltip } from "@mui/material";
 import { WcmMode, wcmModes } from "../../model/modes";
 import { useCurrentWcmMode } from "../../hooks/use-current-wcm-mode";
 import { Section } from "../section/section";
+import { SectionTitle } from "../section/section-title";
 
 const modeNames: Record<WcmMode, string> = {
   disabled: "Disabled",
@@ -23,7 +24,7 @@ export const Mode: FC = () => {
 
   return (
     <Section>
-      <Section.Title>WCM mode</Section.Title>
+      <SectionTitle>WCM mode</SectionTitle>
       <Section.Buttons
         value={currentWcmMode}
         onChange={(mode) => handleWcmModeChange(mode)}

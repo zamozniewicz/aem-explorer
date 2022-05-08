@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 
 export const useStorage = <T>(key: string, defaultValue: T) => {
-  const [value, setValue] = useState<T>(defaultValue);
+  const [storedValue, setStoredValue] = useState<T>(defaultValue);
 
   useEffect(() => {
     chrome.storage?.sync.get(key, (storage) => {
       const saved = storage[key] || defaultValue;
-      setValue(saved);
+      setStoredValue(saved);
     });
   }, [key, defaultValue]);
 
-  useEffect(() => {
-    chrome.storage?.sync.set({ [key]: value });
-  }, [value]);
+  const setValue = (value: T | ((value: T) => T)): void => {
+    const valueToStore = value instanceof Function ? value(storedValue) : value;
 
-  return [value, setValue] as const;
+    chrome.storage?.sync.set({ [key]: valueToStore });
+    setStoredValue(valueToStore);
+  };
+
+  return [storedValue, setValue] as const;
 };
