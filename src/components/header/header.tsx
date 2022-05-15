@@ -1,11 +1,14 @@
 import { FC } from "react";
 import { AppBar, Box, FormControlLabel, Switch, Toolbar } from "@mui/material";
-import { usePersistDisabled } from "../../hooks/use-persist-disabled";
 import { usePreferencesContext } from "../../contexts/preferences-context";
 
 export const Header: FC = () => {
-  const { openInNewTab, toggleOpenInNewTab } = usePreferencesContext();
-  const [persistDisabled, togglePersistDisabled] = usePersistDisabled();
+  const {
+    openInNewTab,
+    persistDisabled,
+    togglePersistDisabled,
+    toggleOpenInNewTab,
+  } = usePreferencesContext();
 
   return (
     <AppBar position="sticky" color="primary">

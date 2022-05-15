@@ -1,21 +1,10 @@
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { asMock } from "../../test/as-mock";
 import { PreferencesContext } from "../../contexts/preferences-context";
-import { usePersistDisabled } from "../../hooks/use-persist-disabled";
 import { Header } from "./header";
 
-jest.mock("../../hooks/use-open-in-new-tab");
-jest.mock("../../hooks/use-persist-disabled");
-
-const mockedUsePersistDisabled = asMock(usePersistDisabled);
-
 describe("Header component", () => {
-  beforeEach(() => {
-    mockedUsePersistDisabled.mockReturnValue([false, () => {}]);
-  });
-
   describe("New tab switch", () => {
     const newTabName = "New tab";
 
@@ -25,6 +14,8 @@ describe("Header component", () => {
           value={{
             openInNewTab: false,
             toggleOpenInNewTab: () => {},
+            persistDisabled: false,
+            togglePersistDisabled: () => {},
           }}
         >
           <Header />
@@ -41,6 +32,8 @@ describe("Header component", () => {
           value={{
             openInNewTab: true,
             toggleOpenInNewTab: () => {},
+            persistDisabled: false,
+            togglePersistDisabled: () => {},
           }}
         >
           <Header />
@@ -59,6 +52,8 @@ describe("Header component", () => {
           value={{
             openInNewTab: false,
             toggleOpenInNewTab: mockToggleOpenInNewTab,
+            persistDisabled: false,
+            togglePersistDisabled: () => {},
           }}
         >
           <Header />
@@ -76,9 +71,18 @@ describe("Header component", () => {
     const persistDisabledName = "Persist disabled mode";
 
     it("renders persist disabled switch", () => {
-      mockedUsePersistDisabled.mockReturnValue([false, () => {}]);
-
-      render(<Header />);
+      render(
+        <PreferencesContext.Provider
+          value={{
+            openInNewTab: false,
+            toggleOpenInNewTab: () => {},
+            persistDisabled: false,
+            togglePersistDisabled: () => {},
+          }}
+        >
+          <Header />
+        </PreferencesContext.Provider>
+      );
 
       const persistDisabled = screen.getByRole("checkbox", {
         name: persistDisabledName,
@@ -87,9 +91,18 @@ describe("Header component", () => {
     });
 
     it("renders checked persist disabled switch", () => {
-      mockedUsePersistDisabled.mockReturnValue([true, () => {}]);
-
-      render(<Header />);
+      render(
+        <PreferencesContext.Provider
+          value={{
+            openInNewTab: false,
+            toggleOpenInNewTab: () => {},
+            persistDisabled: true,
+            togglePersistDisabled: () => {},
+          }}
+        >
+          <Header />
+        </PreferencesContext.Provider>
+      );
 
       const newPersitDisabledSwitch = screen.getByRole("checkbox", {
         name: persistDisabledName,
@@ -99,12 +112,19 @@ describe("Header component", () => {
 
     it("toggles tab switch", () => {
       const mockTogglePersistDisabled = jest.fn();
-      mockedUsePersistDisabled.mockReturnValue([
-        false,
-        mockTogglePersistDisabled,
-      ]);
 
-      render(<Header />);
+      render(
+        <PreferencesContext.Provider
+          value={{
+            openInNewTab: false,
+            toggleOpenInNewTab: () => {},
+            persistDisabled: false,
+            togglePersistDisabled: mockTogglePersistDisabled,
+          }}
+        >
+          <Header />
+        </PreferencesContext.Provider>
+      );
 
       const newPersitDisabledSwitch = screen.getByRole("checkbox", {
         name: persistDisabledName,
