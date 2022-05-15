@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.13 (May 15, 2022)
+
+* Fix Persist disabled functionality
+
 ## 0.0.12 (May 08, 2022)
 
 * Open new tab next to the current one

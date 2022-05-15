@@ -1,6 +1,6 @@
 {
   "name": "aem-explorer",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": true,
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
