@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.14 (Sep 13, 2022)
+
+* Add link in the footer
+
 ## 0.0.13 (May 15, 2022)
 
 * Fix Persist disabled functionality
