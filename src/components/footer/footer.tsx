@@ -1,11 +1,12 @@
 import {
   AppBar,
-  Toolbar,
   Box,
-  Tooltip,
   IconButton,
-  Typography,
+  Link,
   Stack,
+  Toolbar,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
@@ -19,15 +20,22 @@ export const Footer = () => {
   return (
     <AppBar position="sticky" color="primary" sx={{ top: "auto", bottom: 0 }}>
       <Toolbar>
-        <Stack direction="row" alignItems="center" spacing={1.5}>
-          <img
-            src="icons/icon-128.png"
-            alt="AEM Explorer logo"
-            width="20"
-            height="20"
-          />
-          <Typography variant="body1">AEM Explorer</Typography>
-        </Stack>
+        <Link
+          href="https://chrome.google.com/webstore/detail/aem-explorer/ccmaglfddhhajghfpiifkjkikabckohn"
+          underline="none"
+          color="white"
+          target="_blank"
+        >
+          <Stack direction="row" alignItems="center" spacing={1.5}>
+            <img
+              src="icons/icon-128.png"
+              alt="AEM Explorer logo"
+              width="20"
+              height="20"
+            />
+            <Typography variant="body1">AEM Explorer</Typography>
+          </Stack>
+        </Link>
 
         <Box sx={{ flexGrow: 1 }} />
 
